@@ -1,0 +1,6 @@
+{
+  "name": "ParkirPintar Manless",
+  "description": "Sistem parkir manless otomatis dengan dashboard manajemen real-time, integrasi QR code, dan simulasi pengenalan plat nomor.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": []
+}

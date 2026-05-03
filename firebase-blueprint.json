@@ -1,0 +1,183 @@
+{
+  "entities": {
+    "ParkingLog": {
+      "title": "Parking Log",
+      "description": "Records of vehicles entering and exiting the parking facility",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ticketCode": { "type": "string" },
+        "plateNumber": { "type": "string" },
+        "entryTime": { "type": "number" },
+        "exitTime": { "type": "number" },
+        "status": { "type": "string", "enum": ["parked", "exited"] },
+        "fare": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["cash", "e-money", "qris"] },
+        "vehicleType": { "type": "string", "enum": ["car", "motorcycle"] },
+        "branchId": { "type": "string" }
+      },
+      "required": ["id", "ticketCode", "plateNumber", "entryTime", "status", "vehicleType", "branchId"]
+    },
+    "ParkingConfig": {
+      "title": "Parking Configuration",
+      "description": "System-wide settings for rates and company information",
+      "type": "object",
+      "properties": {
+        "hourlyRateCar": { "type": "number" },
+        "hourlyRateMotorcycle": { "type": "number" },
+        "baseRateCar": { "type": "number" },
+        "baseRateMotorcycle": { "type": "number" },
+        "freeBufferMinutes": { "type": "number" },
+        "maxDailyRateCar": { "type": "number" },
+        "maxDailyRateMotorcycle": { "type": "number" },
+        "overnightCharge": { "type": "number" },
+        "lostTicketCharge": { "type": "number" },
+        "serverIp": { "type": "string" },
+        "gateway": { "type": "string" },
+        "gateControllerIp": { "type": "string" },
+        "gateControllerPort": { "type": "number" },
+        "manlessStationIp": { "type": "string" },
+        "printerType": { "type": "string", "enum": ["thermal", "dot-matrix", "laser"] },
+        "printerPort": { "type": "string" },
+        "companyName": { "type": "string" },
+        "companyAddress": { "type": "string" },
+        "companyPhone": { "type": "string" },
+        "companyEmail": { "type": "string" },
+        "companyLogoUrl": { "type": "string" }
+      }
+    },
+    "Branch": {
+      "title": "Branch",
+      "description": "Information about a parking facility branch",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "location": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "code": { "type": "string" },
+        "mode": { "type": "string", "enum": ["manual", "automatic", "hybrid"] },
+        "capacity": {
+          "type": "object",
+          "properties": {
+            "car": { "type": "number" },
+            "motorcycle": { "type": "number" }
+          }
+        }
+      },
+      "required": ["id", "name", "location", "status", "code", "mode", "capacity"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "Staff member information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "name": { "type": "string" },
+        "position": { "type": "string" },
+        "department": { "type": "string" },
+        "phone": { "type": "string" },
+        "joinDate": { "type": "number" },
+        "photoUrl": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "name", "position", "department", "phone", "joinDate"]
+    },
+    "Member": {
+      "title": "Member",
+      "description": "Registered parking member information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "plateNumber": { "type": "string" },
+        "phone": { "type": "string" },
+        "vehicleType": { "type": "string", "enum": ["car", "motorcycle"] },
+        "expiryDate": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "expired"] }
+      },
+      "required": ["id", "name", "plateNumber", "phone", "vehicleType", "expiryDate", "status"]
+    },
+    "HardwareDevice": {
+      "title": "Hardware Device",
+      "description": "IoT devices managed by the system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "ipAddress": { "type": "string" },
+        "port": { "type": "number" },
+        "status": { "type": "string" },
+        "branchId": { "type": "string" },
+        "lastSync": { "type": "number" }
+      },
+      "required": ["id", "name", "type", "ipAddress", "port", "status", "branchId"]
+    },
+    "SystemIssue": {
+      "title": "System Issue",
+      "description": "Trouble tickets reported by staff",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "priority": { "type": "string" },
+        "status": { "type": "string" },
+        "reporterId": { "type": "string" },
+        "branchId": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "title", "description", "category", "priority", "status", "reporterId", "branchId", "createdAt", "updatedAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "App user profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "username": { "type": "string" },
+        "role": { "type": "string" },
+        "branchId": { "type": "string" }
+      },
+      "required": ["id", "name", "username", "role"]
+    }
+  },
+  "firestore": {
+    "logs/{logId}": {
+      "schema": "ParkingLog",
+      "description": "Collection of all parking logs"
+    },
+    "configs/main": {
+      "schema": "ParkingConfig",
+      "description": "Global configuration document"
+    },
+    "branches/{branchId}": {
+      "schema": "Branch",
+      "description": "Collection of all branches"
+    },
+    "employees/{employeeId}": {
+      "schema": "Employee",
+      "description": "Collection of all employees"
+    },
+    "members/{memberId}": {
+      "schema": "Member",
+      "description": "Collection of all members"
+    },
+    "hardware/{deviceId}": {
+      "schema": "HardwareDevice",
+      "description": "Collection of all hardware devices"
+    },
+    "issues/{issueId}": {
+      "schema": "SystemIssue",
+      "description": "Collection of all system issues"
+    },
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    }
+  }
+}

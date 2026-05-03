@@ -1,0 +1,127 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // -------------------------------------------------------------------------
+    // Phase 0: Global Safety Net
+    // -------------------------------------------------------------------------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // -------------------------------------------------------------------------
+    // Phase 3: Primitives
+    // -------------------------------------------------------------------------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        getUserData().role == 'admin'
+      );
+    }
+
+    function isStaff() {
+      return isSignedIn() && (getUserData().role == 'karyawan' || getUserData().role == 'admin');
+    }
+
+    // -------------------------------------------------------------------------
+    // Validation Blueprints
+    // -------------------------------------------------------------------------
+    function isValidLog(data) {
+      return data.keys().hasAll(['id', 'ticketCode', 'plateNumber', 'entryTime', 'status', 'vehicleType', 'branchId']) &&
+             data.id is string && data.id.size() <= 128 &&
+             data.ticketCode is string && data.ticketCode.size() <= 20 &&
+             data.plateNumber is string && data.plateNumber.size() <= 20 &&
+             data.entryTime is number &&
+             data.status in ['parked', 'exited'] &&
+             data.vehicleType in ['car', 'motorcycle'] &&
+             data.branchId is string;
+    }
+
+    function isValidConfig(data) {
+      return data.hourlyRateCar is number && 
+             data.hourlyRateMotorcycle is number &&
+             data.companyName is string && data.companyName.size() <= 100;
+    }
+
+    // -------------------------------------------------------------------------
+    // Match Blocks
+    // -------------------------------------------------------------------------
+
+    match /users/{userId} {
+      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isSignedIn() && request.auth.uid == userId && (
+        !('role' in incoming()) || incoming().role == 'karyawan'
+      ) && incoming().name.size() <= 100 && incoming().username.size() <= 50;
+      allow update: if isSignedIn() && request.auth.uid == userId && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['name', 'username']) &&
+        incoming().name.size() <= 100 && incoming().username.size() <= 50
+      ) || isAdmin();
+    }
+
+    match /logs/{logId} {
+      allow get: if isStaff();
+      allow list: if isStaff() && (
+        (!('branchId' in resource.data) || resource.data.branchId == getUserData().branchId || isAdmin())
+      );
+      allow create: if isStaff() && isValidLog(incoming()) && (
+        incoming().branchId == getUserData().branchId || isAdmin()
+      );
+      allow update: if isStaff() && isValidLog(incoming()) && (
+        (existing().status == 'parked' && incoming().status == 'exited' && 
+         incoming().diff(existing()).affectedKeys().hasOnly(['status', 'exitTime', 'fare', 'paymentMethod']))
+      ) || isAdmin();
+    }
+
+    match /configs/main {
+      allow read: if isSignedIn();
+      allow write: if isAdmin() && isValidConfig(incoming());
+    }
+
+    match /branches/{branchId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /employees/{employeeId} {
+      allow read: if isStaff(); // Restrict PII to staff/admin
+      allow write: if isAdmin();
+    }
+
+    match /members/{memberId} {
+      allow read: if isStaff(); // Restrict PII to staff/admin
+      allow write: if isStaff();
+    }
+
+    match /hardware/{deviceId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /issues/{issueId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && (incoming().reporterId == request.auth.uid);
+      allow update: if isAdmin() || (isSignedIn() && incoming().reporterId == request.auth.uid && 
+        incoming().diff(existing()).affectedKeys().hasOnly(['title', 'description', 'updatedAt']));
+    }
+  }
+}
