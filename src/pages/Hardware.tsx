@@ -74,15 +74,15 @@ export default function Hardware() {
     <div className="max-w-6xl mx-auto space-y-8 pb-12">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Hardware Integration</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Manage IOT Devices & Branch Service Modes</p>
+          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Integrasi Perangkat Keras</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Kelola Perangkat IOT & Mode Layanan Cabang</p>
         </div>
         <button 
           onClick={() => setShowAddModal(true)}
           className="bg-blue-600 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
         >
           <Plus size={16} />
-          Register Device
+          Daftar Perangkat
         </button>
       </div>
 
@@ -94,14 +94,14 @@ export default function Hardware() {
               <div className="bg-indigo-50 text-indigo-600 p-2.5 rounded-xl">
                 <Box size={20} />
               </div>
-              <h3 className="font-black text-slate-800 tracking-tighter uppercase">Service Mode</h3>
+              <h3 className="font-black text-slate-800 tracking-tighter uppercase">Mode Layanan</h3>
             </div>
             
             <div className="space-y-3">
               {[
-                { id: 'manual', label: 'Manual POS', desc: 'Staff handles entry & exit manually.' },
-                { id: 'automatic', label: 'Manless System', desc: 'Fully automated using manless stations.' },
-                { id: 'hybrid', label: 'Hybrid Mode', desc: 'Automatic entry with manual POS exit.' }
+                { id: 'manual', label: 'POS Manual', desc: 'Staf menangani masuk & keluar secara manual.' },
+                { id: 'automatic', label: 'Sistem Tanpa Awak', desc: 'Sepenuhnya otomatis menggunakan stasiun tanpa awak.' },
+                { id: 'hybrid', label: 'Mode Hibrida', desc: 'Masuk otomatis dengan keluar POS manual.' }
               ].map((mode) => (
                 <button
                   key={mode.id}
@@ -137,10 +137,10 @@ export default function Hardware() {
           <div className="bg-amber-50 rounded-[2rem] p-6 border border-amber-100 space-y-3">
             <div className="flex items-center gap-2 text-amber-700 font-black text-[10px] uppercase tracking-widest">
               <AlertCircle size={14} />
-              Protocol Note
+              Catatan Protokol
             </div>
             <p className="text-[10px] text-amber-600 font-medium leading-relaxed italic">
-              * Manless mode requires static IP configuration for all connected gate controllers. Make sure HTTP Port 8080 is open in your local network.
+              * Mode tanpa awak memerlukan konfigurasi IP statis untuk semua pengontrol pintu yang terhubung. Pastikan Port HTTP 8080 terbuka di jaringan lokal Anda.
             </p>
           </div>
         </div>
@@ -150,6 +150,14 @@ export default function Hardware() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {hardware.map((device) => {
               const Icon = deviceIcons[device.type] || Cpu;
+              const typeLabels: Record<HardwareType, string> = {
+                gate: 'Pintu Palang',
+                manless_entry: 'Masuk Tanpa Awak',
+                manless_exit: 'Keluar Tanpa Awak',
+                printer: 'Printer POS',
+                camera: 'Kamera LPR',
+                rfid_reader: 'Pembaca RFID'
+              };
               return (
                 <motion.div
                   layout
@@ -167,12 +175,12 @@ export default function Hardware() {
                       <div>
                         <h4 className="font-black text-slate-800 text-sm uppercase tracking-tight">{device.name}</h4>
                         <div className="flex items-center gap-2 mt-0.5">
-                           <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{device.type.replace('_', ' ')}</span>
+                           <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{typeLabels[device.type]}</span>
                            <span className="w-1 h-1 rounded-full bg-slate-300" />
                            <span className={cn(
                              "text-[9px] font-black uppercase tracking-widest",
                              device.status === 'online' ? "text-emerald-500" : "text-rose-500"
-                           )}>{device.status}</span>
+                           )}>{device.status === 'online' ? 'Online' : 'Offline'}</span>
                         </div>
                       </div>
                     </div>
@@ -199,7 +207,7 @@ export default function Hardware() {
                        </button>
                        <button className="flex items-center justify-center gap-2 py-2.5 rounded-xl border-2 border-slate-100 text-slate-600 text-[10px] font-black uppercase tracking-widest hover:border-blue-200 hover:text-blue-600 transition-all">
                          <Power size={14} />
-                         Trigger
+                         Picukan
                        </button>
                     </div>
                   </div>
@@ -210,7 +218,7 @@ export default function Hardware() {
             {hardware.length === 0 && (
               <div className="col-span-full py-20 flex flex-col items-center justify-center text-slate-400 bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-200">
                 <WifiOff size={48} className="mb-4 opacity-20" />
-                <p className="text-xs font-black uppercase tracking-[0.2em]">No hardware connected to this branch</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em]">Tidak ada perangkat keras yang terhubung ke cabang ini</p>
               </div>
             )}
           </div>
@@ -236,40 +244,40 @@ export default function Hardware() {
             >
               <div className="p-8 space-y-6">
                 <div>
-                  <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">New Hardware</h3>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Register a new peripheral device</p>
+                  <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Perangkat Baru</h3>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Daftarkan perangkat periferal baru</p>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Device Name</label>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Nama Perangkat</label>
                     <input 
                       type="text" 
                       value={newDevice.name}
                       onChange={e => setNewDevice({...newDevice, name: e.target.value})}
-                      placeholder="e.g. South Entry Gate"
+                      placeholder="misal: Pintu Masuk Selatan"
                       className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 font-bold text-slate-700 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Device Type</label>
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Tipe Perangkat</label>
                       <select 
                         value={newDevice.type}
                         onChange={e => setNewDevice({...newDevice, type: e.target.value as any})}
                         className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 font-bold text-slate-700 focus:border-blue-500 outline-none transition-all"
                       >
-                        <option value="gate">Barrier Gate</option>
-                        <option value="manless_entry">Manless Entry</option>
-                        <option value="manless_exit">Manless Exit</option>
-                        <option value="printer">POS Printer</option>
-                        <option value="camera">LPR Camera</option>
-                        <option value="rfid_reader">RFID Reader</option>
+                        <option value="gate">Pintu Palang</option>
+                        <option value="manless_entry">Masuk Tanpa Awak</option>
+                        <option value="manless_exit">Keluar Tanpa Awak</option>
+                        <option value="printer">Printer POS</option>
+                        <option value="camera">Kamera LPR</option>
+                        <option value="rfid_reader">Pembaca RFID</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">IP Address</label>
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Alamat IP</label>
                       <input 
                         type="text" 
                         value={newDevice.ipAddress}
@@ -281,7 +289,7 @@ export default function Hardware() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">HTTP Port</label>
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Port HTTP</label>
                       <input 
                         type="number" 
                         value={newDevice.port}
@@ -297,13 +305,13 @@ export default function Hardware() {
                     onClick={() => setShowAddModal(false)}
                     className="flex-1 py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all"
                   >
-                    Cancel
+                    Batal
                   </button>
                   <button 
                     onClick={handleAdd}
                     className="flex-1 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all"
                   >
-                    Register
+                    Daftar
                   </button>
                 </div>
               </div>

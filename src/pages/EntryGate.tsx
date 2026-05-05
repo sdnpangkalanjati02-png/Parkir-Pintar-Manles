@@ -60,7 +60,7 @@ export default function EntryGate() {
       setShowCamera(true);
     } catch (err) {
       console.error("Camera error:", err);
-      alert("Please ensure camera permissions are granted.");
+      alert("Harap pastikan izin kamera telah diberikan.");
     }
   };
 
@@ -173,8 +173,8 @@ export default function EntryGate() {
         
         <div className="relative z-10 flex flex-col items-center">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-black tracking-tighter uppercase mb-2">ParkPintar Manless Entry</h2>
-            <p className="text-slate-400 font-medium">Automatic Ticketing & Plate Recognition</p>
+            <h2 className="text-3xl font-black tracking-tighter uppercase mb-2">Masuk Manless ParkPintar</h2>
+            <p className="text-slate-400 font-medium">Tiket Otomatis & Pengenalan Plat</p>
           </div>
 
           {!ticket && !scanResult ? (
@@ -189,7 +189,7 @@ export default function EntryGate() {
                   )}
                 >
                   <Car size={48} />
-                  <span className="font-bold uppercase tracking-widest text-sm">Automobile</span>
+                  <span className="font-bold uppercase tracking-widest text-sm">Mobil</span>
                 </button>
                 <button
                   onClick={() => setVehicleType('motorcycle')}
@@ -199,7 +199,7 @@ export default function EntryGate() {
                   )}
                 >
                   <Bike size={48} />
-                  <span className="font-bold uppercase tracking-widest text-sm">Two Wheeler</span>
+                  <span className="font-bold uppercase tracking-widest text-sm">Motor</span>
                 </button>
               </div>
 
@@ -207,7 +207,7 @@ export default function EntryGate() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center px-1">
                   <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    Recognition Method
+                    Metode Pengenalan
                   </div>
                   <div className="flex gap-2">
                     <button 
@@ -218,7 +218,7 @@ export default function EntryGate() {
                       )}
                     >
                       {showCamera && cameraMode === 'plate' ? <X size={12} /> : <Camera size={12} />}
-                      {showCamera && cameraMode === 'plate' ? "Close ALPR" : "Plate AI"}
+                      {showCamera && cameraMode === 'plate' ? "Tutup ALPR" : "AI Plat"}
                     </button>
                     <button 
                       onClick={() => { if(showCamera && cameraMode === 'qr') stopCamera(); else startCamera('qr'); }}
@@ -228,7 +228,7 @@ export default function EntryGate() {
                       )}
                     >
                       {showCamera && cameraMode === 'qr' ? <X size={12} /> : <QrCode size={12} />}
-                      {showCamera && cameraMode === 'qr' ? "Close Scanner" : "Scan Ticket"}
+                      {showCamera && cameraMode === 'qr' ? "Tutup Scanner" : "Scan Tiket"}
                     </button>
                     {!showCamera && (
                       <button 
@@ -240,7 +240,7 @@ export default function EntryGate() {
                         )}
                       >
                         <Scan size={12} />
-                        Simulate ANPR
+                        Simulasi ANPR
                       </button>
                     )}
                     {!showCamera && (
@@ -248,7 +248,7 @@ export default function EntryGate() {
                         onClick={() => setPlate('')}
                         className="bg-slate-800 text-slate-500 px-3 py-1 rounded-full text-[10px] font-bold flex items-center gap-1.5 hover:text-slate-300"
                       >
-                        <RefreshCw size={12} /> Clear
+                        <RefreshCw size={12} /> Bersihkan
                       </button>
                     )}
                   </div>
@@ -295,12 +295,12 @@ export default function EntryGate() {
                           {isScanning ? (
                             <div className="bg-blue-600/90 px-6 py-3 rounded-2xl flex items-center gap-3 shadow-xl backdrop-blur-sm border border-blue-400">
                               <RefreshCw className="animate-spin" size={20} />
-                              <span className="font-bold tracking-widest text-sm uppercase">AI Analyzing Plate...</span>
+                              <span className="font-bold tracking-widest text-sm uppercase">AI Menganalisis Plat...</span>
                             </div>
                           ) : scanResult ? (
                             <div className="bg-emerald-600/90 px-6 py-3 rounded-2xl flex items-center gap-3 shadow-xl backdrop-blur-sm border border-emerald-400">
                               <CheckCircle2 size={20} />
-                              <span className="font-bold tracking-widest text-sm uppercase">Ticket Found!</span>
+                              <span className="font-bold tracking-widest text-sm uppercase">Tiket Ditemukan!</span>
                             </div>
                           ) : cameraMode === 'plate' ? (
                             <button 
@@ -308,11 +308,11 @@ export default function EntryGate() {
                               className="bg-white/10 hover:bg-white/20 backdrop-blur-md px-8 py-4 rounded-2xl border border-white/20 flex flex-col items-center gap-2 transition-all pointer-events-auto group"
                             >
                               <Scan size={32} className="group-hover:scale-110 transition-transform" />
-                              <span className="font-bold uppercase tracking-widest text-xs">Run ALPR Auto-Detect</span>
+                              <span className="font-bold uppercase tracking-widest text-xs">Jalankan Deteksi Otomatis ALPR</span>
                             </button>
                           ) : (
                             <div className="text-white/40 font-bold uppercase tracking-[0.3em] text-[10px]">
-                              Align QR Code within the box
+                              Sejajarkan Kode QR di dalam kotak
                             </div>
                           )}
                         </div>
@@ -322,14 +322,14 @@ export default function EntryGate() {
                       <div className="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] font-mono font-bold text-blue-400 opacity-60 z-20">
                         <span>FPS: 60.0</span>
                         <span>THRESHOLD: 0.85</span>
-                        <span>LATENCY: 12ms</span>
+                        <span>LATENSI: 12ms</span>
                       </div>
                     </div>
                   ) : (
                     <div className="space-y-6">
                       <div className="bg-slate-800 p-8 rounded-2xl border-2 border-slate-700 text-center relative">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 px-4 py-1 text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] border border-slate-700 rounded-full">
-                          Manual Plate Entry
+                          Input Plat Manual
                         </div>
                         <div className="text-5xl font-black font-mono tracking-[0.2em] h-16 flex items-center justify-center relative overflow-hidden">
                           {isSimulatingANPR ? (
@@ -338,7 +338,7 @@ export default function EntryGate() {
                               transition={{ duration: 0.8, repeat: Infinity }}
                               className="text-2xl text-blue-400 tracking-widest z-10"
                             >
-                              PROCESSING...
+                              MEMPROSES...
                             </motion.div>
                           ) : (
                             <div className="z-10">
@@ -414,12 +414,12 @@ export default function EntryGate() {
                     >
                       <Printer size={24} />
                     </motion.div>
-                    PRINTING TICKET...
+                    MENCETAK TIKET...
                   </>
                 ) : (
                   <>
                     <Ticket size={24} />
-                    GENERATE TICKET
+                    BUAT TIKET
                   </>
                 )}
               </button>
@@ -440,7 +440,7 @@ export default function EntryGate() {
                       <div className="text-center mb-6">
                         <h3 className="font-black text-2xl tracking-tighter">PARKPINTAR</h3>
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-y border-slate-100 py-1 mb-4">
-                          {ticket ? 'ENTRY TICKET - MANLESS' : 'REPRINT / VALIDATE TICKET'}
+                          {ticket ? 'TIKET MASUK - MANLESS' : 'CETAK ULANG / VALIDASI TIKET'}
                         </div>
                       </div>
 
@@ -450,21 +450,21 @@ export default function EntryGate() {
 
                       <div className="w-full space-y-4 mb-8">
                         <div className="flex justify-between border-b border-dashed border-slate-200 pb-2">
-                          <span className="text-xs font-bold text-slate-400 uppercase">Ticket ID</span>
+                          <span className="text-xs font-bold text-slate-400 uppercase">ID Tiket</span>
                           <span className="font-mono font-bold text-lg">{data.ticketCode}</span>
                         </div>
                         <div className="flex justify-between border-b border-dashed border-slate-200 pb-2">
-                          <span className="text-xs font-bold text-slate-400 uppercase">Plate Number</span>
+                          <span className="text-xs font-bold text-slate-400 uppercase">Nomor Plat</span>
                           <span className="bg-slate-900 text-white px-2 py-0.5 rounded text-sm font-black tracking-widest">{data.plateNumber}</span>
                         </div>
                         <div className="text-center">
-                          <span className="text-[10px] text-slate-400 font-bold block mb-1">ENTRY TIME</span>
-                          <span className="font-bold text-sm">{new Date(data.entryTime).toLocaleString()}</span>
+                          <span className="text-[10px] text-slate-400 font-bold block mb-1">WAKTU MASUK</span>
+                          <span className="font-bold text-sm">{new Date(data.entryTime).toLocaleString('id-ID')}</span>
                         </div>
                         {data.status === 'exited' && (
                           <div className="bg-rose-50 p-2 rounded-lg text-center">
                             <span className="text-[10px] text-rose-400 font-bold block mb-1">STATUS</span>
-                            <span className="font-bold text-sm text-rose-600 uppercase tracking-wider">Already Exited</span>
+                            <span className="font-bold text-sm text-rose-600 uppercase tracking-wider">Sudah Keluar</span>
                           </div>
                         )}
                       </div>
@@ -474,14 +474,14 @@ export default function EntryGate() {
                         data.status === 'parked' ? "text-emerald-600" : "text-rose-600"
                       )}>
                         {data.status === 'parked' && <CheckCircle2 size={20} />}
-                        {ticket ? 'GATE OPENING...' : data.status === 'parked' ? 'TICKET VALID' : 'TICKET EXPIRED'}
+                        {ticket ? 'PINTU TERBUKA...' : data.status === 'parked' ? 'TIKET VALID' : 'TIKET KADALUARSA'}
                       </div>
 
                       <button
                         onClick={handleReset}
                         className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-colors"
                       >
-                        FINISH
+                        SELESAI
                       </button>
                     </>
                   );
@@ -496,7 +496,7 @@ export default function EntryGate() {
         <div className="flex-1 bg-white p-6 rounded-2xl border border-slate-200">
           <h4 className="font-bold text-slate-800 mb-2 flex items-center gap-2">
             <Info size={18} className="text-blue-600" />
-            Integrasi Hardware
+            Integrasi Perangkat Keras
           </h4>
           <p className="text-sm text-slate-500 leading-relaxed">
             Sistem ini mendukung integrasi protokol <code className="bg-slate-100 px-1 rounded">TCP/IP</code> untuk Gate Barrier dan <code className="bg-slate-100 px-1 rounded">Wiegand</code> untuk sensor Loop kendaraan.

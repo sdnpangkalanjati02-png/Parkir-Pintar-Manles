@@ -38,10 +38,10 @@ export default function FareSettings() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest">
             <DollarSign size={12} />
-            Revenue & Fares
+            Pendapatan & Tarif
           </div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Fare Configuration</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Configure detailed per-hour parking rates and penalty charges</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Konfigurasi Tarif</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Konfigurasi detail tarif parkir per jam dan biaya denda</p>
         </div>
       </div>
 
@@ -55,26 +55,26 @@ export default function FareSettings() {
                 <Car size={20} />
               </div>
               <div>
-                <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Mobil (Car) Rates</h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Pricing for 4-wheel vehicles</p>
+                <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Tarif Mobil</h3>
+                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Harga untuk kendaraan roda 4</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <RateInput 
-                label="Base Rate (First Hour)" 
+                label="Tarif Dasar (Jam Pertama)" 
                 value={formData.baseRateCar} 
-                onChange={(v) => setFormData(d => ({ ...d, baseRateCar: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, baseRateCar: v }))} 
               />
               <RateInput 
-                label="Hourly Rate (After First Hour)" 
+                label="Tarif Per Jam (Setelah Jam Pertama)" 
                 value={formData.hourlyRateCar} 
-                onChange={(v) => setFormData(d => ({ ...d, hourlyRateCar: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, hourlyRateCar: v }))} 
               />
               <RateInput 
-                label="Maximum Daily Rate" 
+                label="Tarif Maksimal Harian" 
                 value={formData.maxDailyRateCar} 
-                onChange={(v) => setFormData(d => ({ ...d, maxDailyRateCar: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, maxDailyRateCar: v }))} 
               />
             </div>
           </div>
@@ -87,26 +87,26 @@ export default function FareSettings() {
                 <Bike size={20} />
               </div>
               <div>
-                <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Motor (Bike) Rates</h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Pricing for 2-wheel vehicles</p>
+                <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Tarif Motor</h3>
+                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Harga untuk kendaraan roda 2</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <RateInput 
-                label="Base Rate (First Hour)" 
+                label="Tarif Dasar (Jam Pertama)" 
                 value={formData.baseRateMotorcycle} 
-                onChange={(v) => setFormData(d => ({ ...d, baseRateMotorcycle: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, baseRateMotorcycle: v }))} 
               />
               <RateInput 
-                label="Hourly Rate (After First Hour)" 
+                label="Tarif Per Jam (Setelah Jam Pertama)" 
                 value={formData.hourlyRateMotorcycle} 
-                onChange={(v) => setFormData(d => ({ ...d, hourlyRateMotorcycle: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, hourlyRateMotorcycle: v }))} 
               />
               <RateInput 
-                label="Maximum Daily Rate" 
+                label="Tarif Maksimal Harian" 
                 value={formData.maxDailyRateMotorcycle} 
-                onChange={(v) => setFormData(d => ({ ...d, maxDailyRateMotorcycle: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, maxDailyRateMotorcycle: v }))} 
               />
             </div>
           </div>
@@ -118,23 +118,23 @@ export default function FareSettings() {
                 <Zap size={20} />
               </div>
               <div>
-                <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Special Charges</h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Penalties and extra services</p>
+                <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Biaya Khusus</h3>
+                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Denda dan layanan tambahan</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <RateInput 
-                label="Lost Ticket Charge" 
+                label="Biaya Tiket Hilang" 
                 value={formData.lostTicketCharge} 
                 icon={<Ticket size={14} />}
-                onChange={(v) => setFormData(d => ({ ...d, lostTicketCharge: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, lostTicketCharge: v }))} 
               />
               <RateInput 
-                label="Overnight Stay Charge" 
+                label="Biaya Menginap" 
                 value={formData.overnightCharge} 
                 icon={<Moon size={14} />}
-                onChange={(v) => setFormData(d => ({ ...d, overnightCharge: v }))} 
+                onChange={(v: number) => setFormData(d => ({ ...d, overnightCharge: v }))} 
               />
             </div>
           </div>
@@ -146,14 +146,14 @@ export default function FareSettings() {
                 <Clock size={20} />
               </div>
               <div>
-                <h3 className="text-sm font-black uppercase tracking-tight">Time Logic</h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Buffer and rounding rules</p>
+                <h3 className="text-sm font-black uppercase tracking-tight">Logika Waktu</h3>
+                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Aturan buffer dan pembulatan</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block">Free Buffer (Minutes)</label>
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block">Buffer Gratis (Menit)</label>
                 <div className="relative">
                   <input 
                     type="number"
@@ -167,8 +167,8 @@ export default function FareSettings() {
               
               <div className="p-4 bg-white/5 border border-white/5 rounded-2xl">
                 <p className="text-[10px] font-bold text-slate-400 leading-relaxed italic">
-                  * Note: Hourly rates are calculated after the first hour completes. 
-                  The free buffer applies from the moment of entry.
+                  * Catatan: Tarif per jam dihitung setelah jam pertama selesai. 
+                  Buffer gratis berlaku sejak saat masuk.
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function FareSettings() {
             className="px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-all flex items-center gap-2"
           >
             <RotateCcw size={16} />
-            Discard
+            Batalkan
           </button>
           <button 
             type="submit"
@@ -196,12 +196,12 @@ export default function FareSettings() {
             {isSaving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Updating Network...
+                Memperbarui...
               </>
             ) : (
               <>
                 <Save size={16} />
-                Deploy Fare Changes
+                Terapkan Tarif
               </>
             )}
           </button>

@@ -76,17 +76,17 @@ export default function SystemIssues() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-rose-50 text-rose-600 rounded-full text-[10px] font-black uppercase tracking-widest">
             <AlertTriangle size={12} />
-            Centralized Support
+            Dukungan Terpusat
           </div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">System Troubles</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Report technical issues directly to the central data center</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Masalah Sistem</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Laporkan masalah teknis secara langsung ke pusat data</p>
         </div>
         <button 
           onClick={() => setIsReporting(true)}
           className="bg-slate-900 text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 shrink-0"
         >
           <Plus size={16} />
-          Log New Trouble
+          Catat Masalah Baru
         </button>
       </div>
 
@@ -112,7 +112,7 @@ export default function SystemIssues() {
                 filterType === type ? "bg-slate-900 text-white shadow-md shadow-slate-200" : "text-slate-400 hover:text-slate-600 hover:bg-slate-50"
               )}
             >
-              {type}
+              {type === 'all' ? 'Semua' : type === 'network' ? 'Jaringan' : type}
             </button>
           ))}
         </div>
@@ -126,8 +126,8 @@ export default function SystemIssues() {
               <CheckCircle2 size={40} />
             </div>
             <div className="space-y-1">
-              <h3 className="text-xl font-black text-slate-800 tracking-tight">System Status: Nominal</h3>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">No active trouble tickets found in this branch</p>
+              <h3 className="text-xl font-black text-slate-800 tracking-tight">Status Sistem: Normal</h3>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Tidak ada tiket masalah aktif ditemukan di cabang ini</p>
             </div>
           </div>
         ) : (
@@ -172,11 +172,11 @@ export default function SystemIssues() {
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2 bg-slate-50 px-2 py-1 rounded-lg">
                         {getStatusIcon(issue.status)}
-                        <span className="text-[9px] font-black text-slate-600 uppercase tracking-widest">{issue.status}</span>
+                        <span className="text-[9px] font-black text-slate-600 uppercase tracking-widest">{issue.status === 'open' ? 'Terbuka' : issue.status === 'investigating' ? 'Investigasi' : 'Selesai'}</span>
                       </div>
                     </div>
                     <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                       TS: {new Date(issue.createdAt).toLocaleTimeString()}
+                       TS: {new Date(issue.createdAt).toLocaleTimeString('id-ID')}
                     </div>
                   </div>
                 </motion.div>
@@ -204,7 +204,7 @@ export default function SystemIssues() {
                className="relative w-full max-w-lg bg-white rounded-[3rem] shadow-2xl overflow-hidden"
              >
                <div className="p-8 pb-0 flex justify-between items-center">
-                 <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Diagnose & Report</h3>
+                 <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Diagnosa & Lapor</h3>
                  <button 
                    onClick={() => setIsReporting(false)}
                    className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
@@ -215,54 +215,54 @@ export default function SystemIssues() {
                
                <form onSubmit={handleSubmit} className="p-8 space-y-6">
                  <div className="space-y-2">
-                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Issue Headline</label>
+                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Judul Masalah</label>
                    <input 
                      required
                      type="text"
                      value={formData.title}
                      onChange={e => setFormData(d => ({ ...d, title: e.target.value }))}
                      className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-rose-500/10 transition-all shadow-sm"
-                     placeholder="e.g., Gate 1 Controller Not Responding"
+                     placeholder="misal: Pengontrol Pintu 1 Tidak Merespon"
                    />
                  </div>
 
                  <div className="space-y-2">
-                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Detail Description</label>
+                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Deskripsi Detail</label>
                    <textarea 
                      required
                      rows={3}
                      value={formData.description}
                      onChange={e => setFormData(d => ({ ...d, description: e.target.value }))}
                      className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-rose-500/10 transition-all shadow-sm resize-none"
-                     placeholder="Please provide specifics for the engineering team..."
+                     placeholder="Berikan detail spesifik untuk tim teknik..."
                    />
                  </div>
 
                  <div className="grid grid-cols-2 gap-6">
                    <div className="space-y-2">
-                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Category</label>
+                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Kategori</label>
                      <select 
                        value={formData.category}
                        onChange={e => setFormData(d => ({ ...d, category: e.target.value as any }))}
                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-rose-500/10 transition-all shadow-sm appearance-none"
                      >
                        <option value="hardware">Hardware</option>
-                       <option value="network">Network</option>
+                       <option value="network">Jaringan (Network)</option>
                        <option value="software">Software</option>
-                       <option value="other">Other</option>
+                       <option value="other">Lainnya</option>
                      </select>
                    </div>
                    <div className="space-y-2">
-                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Severity</label>
+                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Keparahan</label>
                      <select 
                        value={formData.priority}
                        onChange={e => setFormData(d => ({ ...d, priority: e.target.value as any }))}
                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-rose-500/10 transition-all shadow-sm appearance-none"
                      >
-                       <option value="low">Low</option>
-                       <option value="medium">Medium</option>
-                       <option value="high">High</option>
-                       <option value="critical">Critical</option>
+                       <option value="low">Rendah</option>
+                       <option value="medium">Sedang</option>
+                       <option value="high">Tinggi</option>
+                       <option value="critical">Kritis</option>
                      </select>
                    </div>
                  </div>
@@ -272,7 +272,7 @@ export default function SystemIssues() {
                    className="w-full bg-rose-600 text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-700 transition-all shadow-xl shadow-rose-200 flex items-center justify-center gap-2"
                  >
                    <Send size={18} />
-                   Transmit To Headquarters
+                   Kirim Ke Markas Pusat
                  </button>
                </form>
              </motion.div>

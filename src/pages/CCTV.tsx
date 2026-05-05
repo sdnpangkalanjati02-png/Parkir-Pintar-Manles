@@ -27,12 +27,12 @@ interface Camera {
 }
 
 const CAMERAS: Camera[] = [
-  { id: 'CAM-01', name: 'ENTRY GATE 1', location: 'North Entrance', status: 'online', type: 'gate', resolution: '4K', fps: 60 },
-  { id: 'CAM-02', name: 'EXIT GATE 1', location: 'South Exit', status: 'online', type: 'gate', resolution: '4K', fps: 55 },
-  { id: 'CAM-03', name: 'PARKING A-1', location: 'Main Lot West', status: 'online', type: 'area', resolution: '1080p', fps: 30 },
-  { id: 'CAM-04', name: 'VIP ZONE', location: 'Basement 1', status: 'alert', type: 'vip', resolution: '1080p', fps: 30 },
-  { id: 'CAM-05', name: 'LOBBY DROP', location: 'Main Lobby', status: 'online', type: 'area', resolution: '720p', fps: 24 },
-  { id: 'CAM-06', name: 'PERIMETER 2', location: 'Rear Fence', status: 'offline', type: 'area', resolution: '1080p', fps: 0 },
+  { id: 'CAM-01', name: 'GERBANG MASUK 1', location: 'Pintu Masuk Utara', status: 'online', type: 'gate', resolution: '4K', fps: 60 },
+  { id: 'CAM-02', name: 'GERBANG KELUAR 1', location: 'Pintu Keluar Selatan', status: 'online', type: 'gate', resolution: '4K', fps: 55 },
+  { id: 'CAM-03', name: 'PARKIR A-1', location: 'Lahan Utama Barat', status: 'online', type: 'area', resolution: '1080p', fps: 30 },
+  { id: 'CAM-04', name: 'ZONA VIP', location: 'Basement 1', status: 'alert', type: 'vip', resolution: '1080p', fps: 30 },
+  { id: 'CAM-05', name: 'LOBBY DROP', location: 'Lobi Utama', status: 'online', type: 'area', resolution: '720p', fps: 24 },
+  { id: 'CAM-06', name: 'PERIMETER 2', location: 'Pagar Belakang', status: 'offline', type: 'area', resolution: '1080p', fps: 0 },
 ];
 
 export default function CCTVMonitoring() {
@@ -62,8 +62,8 @@ export default function CCTVMonitoring() {
             <Video size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-slate-800 tracking-tighter uppercase leading-none">Security Center</h2>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Live Multispectrual Monitoring System</p>
+            <h2 className="text-2xl font-black text-slate-800 tracking-tighter uppercase leading-none">Pusat Keamanan</h2>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Sistem Pemantauan Multispektral Langsung</p>
           </div>
         </div>
 
@@ -96,12 +96,12 @@ export default function CCTVMonitoring() {
         <div className="w-full lg:w-80 flex flex-col gap-6">
           <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col h-[600px]">
             <div className="p-6 border-b border-slate-50 space-y-4">
-              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Active Channels</h3>
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Saluran Aktif</h3>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
                 <input 
                   type="text"
-                  placeholder="Search feeds..."
+                  placeholder="Cari tayangan..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-50 border-none rounded-xl py-2.5 pl-10 pr-4 text-[11px] font-bold focus:ring-4 focus:ring-blue-500/5 transition-all outline-none"
@@ -145,11 +145,11 @@ export default function CCTVMonitoring() {
              <Activity className="absolute -right-4 -bottom-4 w-32 h-32 opacity-10" />
              <div className="flex items-center gap-3">
                <Shield className="text-blue-200" size={24} />
-               <h3 className="text-sm font-black uppercase tracking-widest underline decoration-blue-400 underline-offset-4">Gate Security</h3>
+               <h3 className="text-sm font-black uppercase tracking-widest underline decoration-blue-400 underline-offset-4">Keamanan Gerbang</h3>
              </div>
              <div className="space-y-4 pt-2">
-                <GateControl label="ENTRY 01" status="SECURED" />
-                <GateControl label="EXIT 01" status="SECURED" />
+                <GateControl label="MASUK 01" status="TERKUNCI" />
+                <GateControl label="KELUAR 01" status="TERKUNCI" />
              </div>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function CCTVMonitoring() {
                 {/* Bottom Stats Overlay */}
                 <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end">
                    <div className="bg-slate-950/80 backdrop-blur-md p-4 rounded-3xl border border-white/10 space-y-3 w-48 shadow-2xl">
-                     <div className="text-[8px] font-black text-white/40 uppercase tracking-widest border-b border-white/5 pb-2">Detection Log</div>
+                     <div className="text-[8px] font-black text-white/40 uppercase tracking-widest border-b border-white/5 pb-2">Log Deteksi</div>
                      <div className="space-y-2">
                        {logs.slice(0, 3).map((log, i) => (
                          <motion.div 

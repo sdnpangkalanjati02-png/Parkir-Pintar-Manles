@@ -28,24 +28,24 @@ export default function Layout() {
   const navItems = [
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
     ...(isManagement ? [
-      { to: '/monitor', icon: Activity, label: 'Live Monitor' },
-      { to: '/reports', icon: FileText, label: 'Reports' },
-      { to: '/members', icon: Users, label: 'Members' },
-      { to: '/employees', icon: Briefcase, label: 'Employees' },
-      { to: '/fares', icon: DollarSign, label: 'Fare Setup' },
-      { to: '/users', icon: Shield, label: 'Users' }
+      { to: '/monitor', icon: Activity, label: 'Monitor Langsung' },
+      { to: '/reports', icon: FileText, label: 'Laporan Keuangan' },
+      { to: '/members', icon: Users, label: 'Member' },
+      { to: '/employees', icon: Briefcase, label: 'Pegawai' },
+      { to: '/fares', icon: DollarSign, label: 'Atur Tarif' },
+      { to: '/users', icon: Shield, label: 'Akses Pengguna' }
     ] : []),
     ...(isStaff ? [
-      { to: '/entry', icon: LogIn, label: 'Entry Gate' },
-      { to: '/exit', icon: LogOut, label: 'Exit Gate' }
+      { to: '/entry', icon: LogIn, label: 'Pintu Masuk' },
+      { to: '/exit', icon: LogOut, label: 'Pintu Keluar' }
     ] : []),
-    { to: '/cctv', icon: Video, label: 'Monitoring' },
-    { to: '/issues', icon: AlertTriangle, label: 'Troubles' },
+    { to: '/cctv', icon: Video, label: 'Monitoring CCTV' },
+    { to: '/issues', icon: AlertTriangle, label: 'Masalah Sistem' },
     ...(isManagement ? [
-      { to: '/branches', icon: Globe, label: 'Regions' },
-      { to: '/hardware', icon: Cpu, label: 'Hardware' }
+      { to: '/branches', icon: Globe, label: 'Kelola Cabang' },
+      { to: '/hardware', icon: Cpu, label: 'Hardware IoT' }
     ] : []),
-    ...(user?.role === 'admin' || user?.role === 'direktur' ? [{ to: '/config', icon: Settings, label: 'Settings' }] : []),
+    ...(user?.role === 'admin' || user?.role === 'direktur' ? [{ to: '/config', icon: Settings, label: 'Pengaturan' }] : []),
   ];
 
   return (
@@ -58,7 +58,7 @@ export default function Layout() {
           </div>
           <div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800 leading-none">{(config.companyName || 'PARK').split(' ')[0]}</h1>
-            <p className="text-[10px] font-bold text-blue-400 tracking-[0.2em] uppercase mt-1">Management System</p>
+            <p className="text-[10px] font-bold text-blue-400 tracking-[0.2em] uppercase mt-1">Sistem Manajemen</p>
           </div>
         </div>
         
@@ -97,12 +97,17 @@ export default function Layout() {
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-bold text-sm text-slate-800 truncate">{user?.name}</div>
-              <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">{user?.role}</div>
+              <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">
+                {user?.role === 'admin' ? 'Administrator' : 
+                 user?.role === 'direktur' ? 'Direktur Utama' : 
+                 user?.role === 'keuangan' ? 'Manajer Keuangan' : 
+                 'Staf Operasional'}
+              </div>
             </div>
             <button 
               onClick={logout}
               className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-              title="Logout"
+              title="Keluar"
             >
               <Power size={18} />
             </button>
@@ -112,15 +117,15 @@ export default function Layout() {
         <div className="p-4 bg-slate-50 mx-4 mb-6 mt-4 rounded-2xl border border-slate-100">
           <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
             <Info size={14} />
-            System Status
+            Status Sistem
           </div>
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-600">Entry Gate</span>
+              <span className="text-slate-600">Pintu Masuk</span>
               <span className="flex items-center gap-1.5 text-green-600 font-medium h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
             </div>
             <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-600">Exit Gate</span>
+              <span className="text-slate-600">Pintu Keluar</span>
               <span className="flex items-center gap-1.5 text-green-600 font-medium h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
             </div>
           </div>
@@ -132,7 +137,12 @@ export default function Layout() {
         <header className="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-20 print:hidden">
           <div className="flex items-center gap-6">
             <div className="text-sm font-medium text-slate-500">
-              Logged in as <span className="text-slate-900 font-semibold uppercase">{user?.name} — {user?.role}</span>
+              Masuk sebagai <span className="text-slate-900 font-semibold uppercase">{user?.name} — {
+                user?.role === 'admin' ? 'Administrator' : 
+                user?.role === 'direktur' ? 'Direktur Utama' : 
+                user?.role === 'keuangan' ? 'Manajer Keuangan' : 
+                'Staf Operasional'
+              }</span>
             </div>
             
             {/* Branch Switcher */}
@@ -145,7 +155,7 @@ export default function Layout() {
                    <Globe size={10} />
                 </div>
                 <span className="text-[10px] font-black text-slate-700 uppercase tracking-tighter">
-                  {currentBranch?.name || 'SELECT BRANCH'}
+                  {currentBranch?.name || 'PILIH CABANG'}
                 </span>
                 <ChevronDown size={12} className={cn("text-slate-400 transition-transform", showBranchPanel && "rotate-180")} />
               </button>
@@ -159,7 +169,7 @@ export default function Layout() {
                     className="absolute top-full mt-2 left-0 w-64 bg-white border border-slate-200 rounded-2xl shadow-2xl z-30 p-2 overflow-hidden"
                   >
                     <div className="px-3 py-2 text-[8px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-50 mb-1">
-                      SELECT ACTIVE BRANCH
+                      PILIH CABANG AKTIF
                     </div>
                     {branches.map((b) => (
                       <button
@@ -188,7 +198,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="flex items-center gap-4 text-xs font-mono bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">
-            INTEGRATED SYSTEM v1.0.4
+            SISTEM TERINTEGRASI v1.0.4
           </div>
         </header>
         <div className="p-8">

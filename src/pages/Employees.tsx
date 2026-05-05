@@ -60,17 +60,17 @@ export default function Employees() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-black uppercase tracking-widest">
             <Users size={12} />
-            Human Resources
+            Sumber Daya Manusia
           </div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Employee Directory</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Manage staff credentials and generate integrated ID cards</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Direktori Karyawan</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Kelola kredensial staf dan buat kartu ID terintegrasi</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-64">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input 
               type="text"
-              placeholder="Search by name or ID..."
+              placeholder="Cari berdasarkan nama atau ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white border border-slate-100 rounded-2xl pl-11 pr-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
@@ -81,7 +81,7 @@ export default function Employees() {
             className="bg-slate-900 text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 shrink-0"
           >
             <UserPlus size={16} />
-            Add Employee
+            Tambah Karyawan
           </button>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function Employees() {
                       setShowCard(true);
                     }}
                     className="p-3 text-slate-300 hover:text-emerald-500 hover:bg-emerald-50 rounded-xl transition-all"
-                    title="Print ID Card"
+                    title="Cetak Kartu ID"
                   >
                     <Printer size={18} />
                   </button>
@@ -156,7 +156,7 @@ export default function Employees() {
                   }}
                   className="text-[10px] font-black text-slate-900 uppercase tracking-widest hover:underline flex items-center gap-1"
                 >
-                  Generate Card
+                  Buat Kartu
                   <ChevronRight size={12} />
                 </button>
               </div>
@@ -172,8 +172,8 @@ export default function Employees() {
               <Users size={32} />
             </div>
             <div className="space-y-1">
-              <h3 className="text-xl font-black text-slate-800 tracking-tight">No Employees Found</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Register staff members to manage credentials</p>
+              <h3 className="text-xl font-black text-slate-800 tracking-tight">Karyawan Tidak Ditemukan</h3>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Daftarkan anggota staf untuk mengelola kredensial</p>
             </div>
           </div>
       )}
@@ -196,7 +196,7 @@ export default function Employees() {
               className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl overflow-hidden"
             >
               <div className="p-8 pb-0 flex justify-between items-center">
-                <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Staff Registration</h3>
+                <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Registrasi Staf</h3>
                 <button 
                   onClick={() => setIsAdding(false)}
                   className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
@@ -208,7 +208,7 @@ export default function Employees() {
               <form onSubmit={handleSubmit} className="p-8 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                    <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Employee ID No.</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">No. ID Karyawan</label>
                     <input 
                       required
                       type="text"
@@ -219,46 +219,46 @@ export default function Employees() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
                     <input 
                       required
                       type="text"
                       value={formData.name}
                       onChange={e => setFormData(d => ({ ...d, name: e.target.value }))}
                       className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
-                      placeholder="Employee Name"
+                      placeholder="Nama Karyawan"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Position</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Jabatan</label>
                     <input 
                       required
                       type="text"
                       value={formData.position}
                       onChange={e => setFormData(d => ({ ...d, position: e.target.value }))}
                       className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
-                      placeholder="Security Staff"
+                      placeholder="Staf Keamanan"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Department</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Departemen</label>
                     <input 
                       required
                       type="text"
                       value={formData.department}
                       onChange={e => setFormData(d => ({ ...d, department: e.target.value }))}
                       className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
-                      placeholder="Operations"
+                      placeholder="Operasional"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Contact Phone</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Telepon Kontak</label>
                     <input 
                       required
                       type="tel"
@@ -269,7 +269,7 @@ export default function Employees() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Join Date</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Tanggal Bergabung</label>
                     <input 
                       required
                       type="date"
@@ -285,7 +285,7 @@ export default function Employees() {
                   className="w-full bg-slate-900 text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-2 mt-4"
                 >
                   <ShieldCheck size={18} />
-                  Confirm Registration
+                  Konfirmasi Registrasi
                 </button>
               </form>
             </motion.div>
@@ -311,7 +311,7 @@ export default function Employees() {
                className="relative w-full max-w-md bg-white rounded-[3rem] shadow-2xl overflow-hidden no-print"
              >
                 <div className="p-8 pb-0 flex justify-between items-center no-print">
-                  <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Credential Preview</h3>
+                  <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Pratinjau Kredensial</h3>
                   <button 
                     onClick={() => setShowCard(false)}
                     className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
@@ -328,8 +328,8 @@ export default function Employees() {
                      <div className="absolute inset-0 pattern-grid-white/[0.05]" />
                      
                      <div className="relative z-10 pt-12 flex flex-col items-center">
-                        <div className="text-[10px] font-black text-white/60 tracking-[0.3em] uppercase mb-1">Parking Authority</div>
-                        <div className="text-lg font-black text-white tracking-widest uppercase mb-8">Integrated Pass</div>
+                        <div className="text-[10px] font-black text-white/60 tracking-[0.3em] uppercase mb-1">Otoritas Parkir</div>
+                        <div className="text-lg font-black text-white tracking-widest uppercase mb-8">Pass Terintegrasi</div>
 
                         <div className="w-32 h-32 rounded-2xl bg-white p-1 shadow-2xl mb-6">
                            <div className="w-full h-full bg-slate-100 rounded-xl flex items-center justify-center overflow-hidden">
@@ -356,9 +356,9 @@ export default function Employees() {
                              <span className="text-[10px] font-black text-white tracking-widest">{selectedEmployee.department}</span>
                            </div>
                            <div className="flex justify-between border-b border-white/10 pb-2">
-                             <span className="text-[8px] font-black text-white/40 uppercase tracking-widest">ISSUED</span>
+                             <span className="text-[8px] font-black text-white/40 uppercase tracking-widest">DITERBITKAN</span>
                              <span className="text-[10px] font-black text-white tracking-widest">
-                               {new Date(selectedEmployee.joinDate).toLocaleDateString()}
+                               {new Date(selectedEmployee.joinDate).toLocaleDateString('id-ID')}
                              </span>
                            </div>
                         </div>
@@ -375,11 +375,11 @@ export default function Employees() {
                        className="flex-1 bg-slate-900 text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-xl shadow-slate-200"
                      >
                         <Printer size={16} />
-                        Print Integrated Card
+                        Cetak Kartu Terintegrasi
                      </button>
                   </div>
                 </div>
-             </motion.div>
+              </motion.div>
           </div>
         )}
       </AnimatePresence>

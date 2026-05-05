@@ -50,17 +50,17 @@ export default function Members() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black uppercase tracking-widest">
             <Users size={12} />
-            Privileged Access
+            Akses Istimewa
           </div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Parking Members</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Manage registered vehicles and seasonal parking passes</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Anggota Parkir</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Kelola kendaraan terdaftar dan pass parkir musiman</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-64">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input 
               type="text"
-              placeholder="Search members..."
+              placeholder="Cari anggota..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white border border-slate-100 rounded-2xl pl-11 pr-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all shadow-sm"
@@ -71,7 +71,7 @@ export default function Members() {
             className="bg-slate-900 text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 shrink-0"
           >
             <UserPlus size={16} />
-            Register Member
+            Daftar Anggota
           </button>
         </div>
       </div>
@@ -122,10 +122,10 @@ export default function Members() {
                     m.status === 'active' ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-rose-50 text-rose-600 border-rose-100"
                   )}>
                     <div className={cn("w-1.5 h-1.5 rounded-full", m.status === 'active' ? "bg-emerald-500" : "bg-rose-500")} />
-                    {m.status}
+                    {m.status === 'active' ? 'Aktif' : 'Nonaktif'}
                   </div>
                   <div className="px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-slate-50 text-slate-400 border border-slate-100">
-                    Expiry: {new Date(m.expiryDate).toLocaleDateString()}
+                    Kedaluwarsa: {new Date(m.expiryDate).toLocaleDateString('id-ID')}
                   </div>
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function Members() {
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">{m.phone}</span>
                 </div>
                 <button className="text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline flex items-center gap-1">
-                  Manage Tier
+                  Kelola Tingkatan
                   <ChevronRight size={12} />
                 </button>
               </div>
@@ -152,8 +152,8 @@ export default function Members() {
               <Users size={32} />
             </div>
             <div className="space-y-1">
-              <h3 className="text-xl font-black text-slate-800 tracking-tight">No Members Found</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Start registering vehicles for seasonal parking access</p>
+              <h3 className="text-xl font-black text-slate-800 tracking-tight">Anggota Tidak Ditemukan</h3>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mulai daftarkan kendaraan untuk akses parkir musiman</p>
             </div>
           </div>
       )}
@@ -176,7 +176,7 @@ export default function Members() {
               className="relative w-full max-w-lg bg-white rounded-[3rem] shadow-2xl overflow-hidden"
             >
               <div className="p-8 pb-0 flex justify-between items-center">
-                <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">New Registration</h3>
+                <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Registrasi Baru</h3>
                 <button 
                   onClick={() => setIsAdding(false)}
                   className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
@@ -187,20 +187,20 @@ export default function Members() {
               
               <form onSubmit={handleSubmit} className="p-8 space-y-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
                   <input 
                     required
                     type="text"
                     value={formData.name}
                     onChange={e => setFormData(d => ({ ...d, name: e.target.value }))}
                     className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all shadow-sm"
-                    placeholder="Owner Name"
+                    placeholder="Nama Pemilik"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Plate Number</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nomor Plat</label>
                     <input 
                       required
                       type="text"
@@ -211,7 +211,7 @@ export default function Members() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Phone</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Telepon</label>
                     <input 
                       required
                       type="tel"
@@ -225,7 +225,7 @@ export default function Members() {
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Vehicle</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Kendaraan</label>
                     <div className="flex bg-slate-50 p-1 rounded-2xl border border-slate-100">
                       {(['car', 'motorcycle'] as const).map(t => (
                         <button
@@ -238,13 +238,13 @@ export default function Members() {
                           )}
                         >
                           {t === 'car' ? <Car size={14} /> : <Bike size={14} />}
-                          {t}
+                          {t === 'car' ? 'Mobil' : 'Motor'}
                         </button>
                       ))}
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Valid Until</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Berlaku Hingga</label>
                     <input 
                       required
                       type="date"
@@ -260,7 +260,7 @@ export default function Members() {
                   className="w-full bg-indigo-600 text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-2 mt-4"
                 >
                   <ShieldCheck size={18} />
-                  Authorize Access Pass
+                  Otorisasi Pass Akses
                 </button>
               </form>
             </motion.div>

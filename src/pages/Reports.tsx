@@ -101,8 +101,8 @@ export default function Reports() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-          <h2 className="text-3xl font-black text-slate-800 tracking-tight uppercase">Financial Reports</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Analyzing network performance and branch revenue</p>
+          <h2 className="text-3xl font-black text-slate-800 tracking-tight uppercase">Laporan Keuangan</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Menganalisis performa jaringan dan pendapatan cabang</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           {timeRange === 'custom' && (
@@ -113,7 +113,7 @@ export default function Reports() {
                 onChange={e => setCustomRange(p => ({ ...p, start: e.target.value }))}
                 className="bg-transparent border-none text-[9px] font-black uppercase outline-none px-2"
               />
-              <span className="text-[8px] font-black text-slate-300">TO</span>
+              <span className="text-[8px] font-black text-slate-300">SAMPAI</span>
               <input 
                 type="date" 
                 value={customRange.end}
@@ -132,7 +132,7 @@ export default function Reports() {
                    timeRange === range ? "bg-blue-600 text-white shadow-md shadow-blue-200" : "text-slate-400 hover:text-slate-600"
                  )}
                >
-                 {range}
+                 {range === 'today' ? 'Hari Ini' : range === 'week' ? 'Minggu Ini' : range === 'month' ? 'Bulan Ini' : 'Kustom'}
                </button>
              ))}
           </div>
@@ -141,14 +141,14 @@ export default function Reports() {
             onChange={e => setSelectedBranchId(e.target.value)}
             className="bg-white border border-slate-100 rounded-xl px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 shadow-sm outline-none focus:ring-2 focus:ring-blue-500/20"
           >
-            <option value="all">All Branches</option>
+            <option value="all">Semua Cabang</option>
             {branches.map(b => (
               <option key={b.id} value={b.id}>{b.name}</option>
             ))}
           </select>
           <button className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-slate-200">
             <Download size={14} />
-            Export
+            Ekspor
           </button>
         </div>
       </div>
@@ -156,33 +156,33 @@ export default function Reports() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard 
-          label="Total Revenue" 
+          label="Total Pendapatan" 
           value={`Rp ${stats.revenue.toLocaleString()}`} 
-          sub="Network gross income"
+          sub="Pendapatan kotor jaringan"
           icon={<DollarSign size={20} />}
           trend="+12.5%"
           color="blue"
         />
         <StatCard 
-          label="Total Transactions" 
+          label="Total Transaksi" 
           value={stats.transactions.toString()} 
-          sub="Successful departures"
+          sub="Kendaraan keluar sukses"
           icon={<TrendingUp size={20} />}
           trend="+8.2%"
           color="indigo"
         />
         <StatCard 
-          label="Car Traffic" 
+          label="Lalu Lintas Mobil" 
           value={stats.cars.toString()} 
-          sub="4-wheel vehicles"
+          sub="Kendaraan roda 4"
           icon={<Car size={20} />}
           trend="-2.4%"
           color="emerald"
         />
         <StatCard 
-          label="Motorcycle Traffic" 
+          label="Lalu Lintas Motor" 
           value={stats.bikes.toString()} 
-          sub="2-wheel vehicles"
+          sub="Kendaraan roda 2"
           icon={<Bike size={20} />}
           trend="+15.0%"
           color="blue"
@@ -194,12 +194,12 @@ export default function Reports() {
         <div className="lg:col-span-2 bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-6">
           <div className="flex justify-between items-center">
             <div>
-              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Revenue Timeline</h3>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Financial growth performance chart</p>
+              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Lini Masa Pendapatan</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Grafik performa pertumbuhan keuangan</p>
             </div>
             <div className="flex items-center gap-2 text-blue-600 font-black text-[10px] uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-full">
                <TrendingUp size={12} />
-               On Target
+               Sesuai Target
             </div>
           </div>
           
@@ -230,7 +230,7 @@ export default function Reports() {
                   contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontSize: '12px' }}
                   labelStyle={{ fontWeight: '800', color: '#1e293b' }}
                 />
-                <Area type="monotone" dataKey="value" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
+                <Area type="monotone" dataKey="value" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" name="Pendapatan" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -239,8 +239,8 @@ export default function Reports() {
         {/* Branch Leaderboard */}
         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-6">
           <div>
-            <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Branch Performance</h3>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Revenue ranking by region</p>
+            <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Performa Cabang</h3>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Peringkat pendapatan per wilayah</p>
           </div>
           
           <div className="space-y-4">
@@ -260,7 +260,7 @@ export default function Reports() {
                   <div className="text-xs font-black text-blue-600">Rp {b.revenue.toLocaleString()}</div>
                   <div className="text-[9px] font-bold text-emerald-500 uppercase flex items-center justify-end gap-1">
                     <TrendingUp size={10} />
-                    Top
+                    Teratas
                   </div>
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default function Reports() {
             onClick={() => window.location.hash = '#/branches'}
             className="w-full py-4 bg-slate-50 hover:bg-slate-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center justify-center gap-2 transition-all mt-4"
           >
-            Manage Regions
+            Kelola Wilayah
             <ChevronRight size={14} />
           </button>
         </div>
@@ -281,8 +281,8 @@ export default function Reports() {
       <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
         <div className="p-8 border-b border-slate-50 flex justify-between items-center">
            <div>
-              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Financial Transaction Log</h3>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Detailed history of recent revenue events</p>
+              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Log Transaksi Keuangan</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Riwayat detail kejadian pendapatan terbaru</p>
            </div>
            <button className="p-3 bg-slate-50 rounded-xl text-slate-400 hover:text-blue-600 transition-all">
              <Filter size={18} />
@@ -292,12 +292,12 @@ export default function Reports() {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-slate-50/50">
-                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Transaction</th>
-                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Branch</th>
-                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Vehicle</th>
-                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Time</th>
-                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Amount</th>
-                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Method</th>
+                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Transaksi</th>
+                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Cabang</th>
+                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Kendaraan</th>
+                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Waktu</th>
+                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Jumlah</th>
+                <th className="px-8 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Metode</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
@@ -318,7 +318,7 @@ export default function Reports() {
                     <div className="flex items-center gap-2">
                       <Globe size={12} className="text-slate-300" />
                       <span className="text-[10px] font-bold text-slate-600 uppercase">
-                        {branches.find(b => b.id === log.branchId)?.name || 'Unknown'}
+                        {branches.find(b => b.id === log.branchId)?.name || 'Tidak Diketahui'}
                       </span>
                     </div>
                   </td>
@@ -328,7 +328,7 @@ export default function Reports() {
                       log.vehicleType === 'car' ? "bg-emerald-50 text-emerald-600" : "bg-indigo-50 text-indigo-600"
                     )}>
                       {log.vehicleType === 'car' ? <Car size={10} /> : <Bike size={10} />}
-                      {log.vehicleType}
+                      {log.vehicleType === 'car' ? 'Mobil' : 'Motor'}
                     </div>
                   </td>
                   <td className="px-8 py-4 text-[10px] font-bold text-slate-500 uppercase">
@@ -339,7 +339,7 @@ export default function Reports() {
                   </td>
                   <td className="px-8 py-4">
                     <div className="text-[9px] font-black text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-1 rounded-md inline-block">
-                      {log.paymentMethod || 'CASH'}
+                      {log.paymentMethod === 'e-money' ? 'E-MONEY' : log.paymentMethod === 'qris' ? 'QRIS' : 'TUNAI'}
                     </div>
                   </td>
                 </tr>

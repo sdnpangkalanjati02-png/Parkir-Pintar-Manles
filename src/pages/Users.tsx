@@ -68,17 +68,17 @@ export default function Users() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest">
             <ShieldCheck size={12} />
-            Access Management
+            Manajemen Akses
           </div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Security Personnel</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Manage administrative roles and system credentials</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Personel Keamanan</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Kelola peran administratif dan kredensial sistem</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-64">
              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
              <input 
                type="text"
-               placeholder="Search personnel..."
+               placeholder="Cari personel..."
                value={searchQuery}
                onChange={(e) => setSearchQuery(e.target.value)}
                className="w-full bg-white border border-slate-100 rounded-2xl pl-11 pr-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm"
@@ -89,7 +89,7 @@ export default function Users() {
             className="bg-slate-900 text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 shrink-0"
           >
             <UserPlus size={16} />
-            Authorize New
+            Otorisasi Baru
           </button>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default function Users() {
                   <button 
                     onClick={() => deleteUser(u.id)}
                     className="p-3 text-slate-300 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all"
-                    title="Revoke Access"
+                    title="Cabut Akses"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -151,10 +151,10 @@ export default function Users() {
               <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Active Node</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Node Aktif</span>
                 </div>
                 <button className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline flex items-center gap-1">
-                  View Profile
+                  Lihat Profil
                   <ChevronRight size={12} />
                 </button>
               </div>
@@ -181,7 +181,7 @@ export default function Users() {
               className="relative w-full max-w-lg bg-white rounded-[3rem] shadow-2xl overflow-hidden"
             >
               <div className="p-8 pb-0 flex justify-between items-center">
-                <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Authorize Personnel</h3>
+                <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Otorisasi Personel</h3>
                 <button 
                   onClick={() => setIsAdding(false)}
                   className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
@@ -193,7 +193,7 @@ export default function Users() {
               <form onSubmit={handleSubmit} className="p-8 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
                     <div className="relative">
                       <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                       <input 
@@ -202,12 +202,12 @@ export default function Users() {
                         value={formData.name}
                         onChange={e => setFormData(d => ({ ...d, name: e.target.value }))}
                         className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm"
-                        placeholder="John Doe"
+                        placeholder="Budi Santoso"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Username</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Pengguna</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">@</div>
                       <input 
@@ -216,14 +216,14 @@ export default function Users() {
                         value={formData.username}
                         onChange={e => setFormData(d => ({ ...d, username: e.target.value }))}
                         className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm"
-                        placeholder="johndoe"
+                        placeholder="budisantoso"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Security Credentials</label>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Kredensial Keamanan</label>
                   <div className="relative">
                     <Key className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input 
@@ -238,7 +238,7 @@ export default function Users() {
                 </div>
 
                 <div className="space-y-4">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Access Tier (Role)</label>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Tingkatan Akses (Peran)</label>
                   <div className="grid grid-cols-2 gap-3">
                     {(['karyawan', 'keuangan', 'direktur', 'admin'] as UserRole[]).map(role => (
                       <button
@@ -263,7 +263,7 @@ export default function Users() {
                   className="w-full bg-blue-600 text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 mt-4 flex items-center justify-center gap-2"
                 >
                   <ShieldCheck size={18} />
-                  Authorize Access
+                  Otorisasi Akses
                 </button>
               </form>
             </motion.div>

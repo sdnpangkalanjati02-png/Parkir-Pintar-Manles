@@ -15,6 +15,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { formatDistanceToNow } from 'date-fns';
+import { id } from 'date-fns/locale';
 
 export default function LiveMonitor() {
   const { allLogs, branches } = useParking();
@@ -48,17 +49,17 @@ export default function LiveMonitor() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-rose-50 text-rose-600 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse">
             <span className="w-2 h-2 rounded-full bg-rose-600" />
-            Live Network Monitor
+            Monitor Jaringan Langsung
           </div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Global Operations</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Real-time vehicle trajectory and regional occupancy</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tighter uppercase leading-none">Operasi Global</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Lintasan kendaraan real-time dan okupansi wilayah</p>
         </div>
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-64">
              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
              <input 
                type="text"
-               placeholder="Search active plate..."
+               placeholder="Cari plat aktif..."
                value={searchQuery}
                onChange={(e) => setSearchQuery(e.target.value)}
                className="w-full bg-white border border-slate-100 rounded-2xl pl-11 pr-4 py-3 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm"
@@ -69,7 +70,7 @@ export default function LiveMonitor() {
             onChange={e => setSelectedBranchId(e.target.value)}
             className="bg-white border border-slate-100 rounded-2xl px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-600 shadow-sm outline-none focus:ring-4 focus:ring-blue-500/10"
           >
-            <option value="all">Global Fleet</option>
+            <option value="all">Armada Global</option>
             {branches.map(b => (
               <option key={b.id} value={b.id}>{b.name.toUpperCase()}</option>
             ))}
@@ -81,20 +82,20 @@ export default function LiveMonitor() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
           <MonitorCard 
-            label="Total Entries Today" 
+            label="Total Masuk Hari Ini" 
             value={allLogs.filter(l => l.entryTime >= new Date().setHours(0,0,0,0)).length} 
             icon={<ArrowRightLeft />}
             color="blue"
           />
           <MonitorCard 
-            label="Current Occupancy" 
+            label="Okupansi Saat Ini" 
             value={activeCount} 
             icon={<Activity />}
             color="emerald"
             pulse
           />
           <MonitorCard 
-            label="Active Branches" 
+            label="Cabang Aktif" 
             value={branches.filter(b => b.status === 'active').length} 
             icon={<Globe />}
             color="indigo"
@@ -103,12 +104,12 @@ export default function LiveMonitor() {
         <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white flex flex-col justify-between relative overflow-hidden group">
           <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-400/30 transition-all" />
           <div className="relative z-10">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Status Quo</h3>
+            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Status Saat Ini</h3>
             <div className="text-3xl font-black tracking-tight tracking-widest">NORMAL</div>
-            <p className="text-[10px] text-slate-500 font-bold uppercase mt-2">All sensors operating within parameters</p>
+            <p className="text-[10px] text-slate-500 font-bold uppercase mt-2">Semua sensor beroperasi sesuai parameter</p>
           </div>
           <div className="flex items-center gap-2 mt-8 text-[10px] font-black uppercase tracking-widest bg-white/10 w-fit px-4 py-2 rounded-full border border-white/10 transition-all hover:bg-white/20 cursor-pointer">
-             Network Health 99.8%
+             Kesehatan Jaringan 99.8%
           </div>
         </div>
       </div>
@@ -118,8 +119,8 @@ export default function LiveMonitor() {
         <div className="lg:col-span-8 bg-white rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
           <div className="p-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/30">
             <div>
-              <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Live Activity Feed</h3>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Consolidated vehicle event stream</p>
+              <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Aliran Aktivitas Langsung</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aliran kejadian kendaraan konsolidasi</p>
             </div>
             <div className="flex gap-2">
                <div className="px-3 py-1.5 bg-white border border-slate-100 rounded-xl text-[9px] font-black uppercase text-slate-400 shadow-sm">
@@ -162,17 +163,17 @@ export default function LiveMonitor() {
                             "px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-widest",
                             log.status === 'parked' ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700"
                           )}>
-                            {log.status === 'parked' ? 'INCOMING' : 'DEPARTED'}
+                            {log.status === 'parked' ? 'MASUK' : 'KELUAR'}
                           </div>
                         </div>
                         <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                           <div className="flex items-center gap-1">
                             <MapPin size={12} className="text-blue-500" />
-                            {branch?.name || 'Unknown Region'}
+                            {branch?.name || 'Wilayah Tidak Diketahui'}
                           </div>
                           <div className="flex items-center gap-1">
                             <Clock size={12} />
-                            {formatDistanceToNow(log.entryTime)} ago
+                            {formatDistanceToNow(log.entryTime, { locale: id })} yang lalu
                           </div>
                         </div>
                       </div>
@@ -198,8 +199,8 @@ export default function LiveMonitor() {
         <div className="lg:col-span-4 space-y-6">
           <div className="bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-sm space-y-6">
             <div>
-              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tighter">Regional Health</h3>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Real-time occupancy across branch nodes</p>
+              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tighter">Kesehatan Wilayah</h3>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Okupansi real-time di seluruh simpul cabang</p>
             </div>
             
             <div className="space-y-6">
@@ -212,7 +213,7 @@ export default function LiveMonitor() {
                   <div key={b.id} className="space-y-2">
                     <div className="flex justify-between items-end">
                       <div className="text-[11px] font-black text-slate-800 uppercase tracking-tight">{b.name}</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{percentage}% Full</div>
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{percentage}% Penuh</div>
                     </div>
                     <div className="h-2 bg-slate-50 rounded-full overflow-hidden border border-slate-100 p-0.5">
                        <motion.div 
@@ -225,8 +226,8 @@ export default function LiveMonitor() {
                        />
                     </div>
                     <div className="flex justify-between text-[8px] font-black text-slate-300 uppercase tracking-widest">
-                       <span>{occupancyCount} ACTIVE</span>
-                       <span>{totalCap} CAP</span>
+                       <span>{occupancyCount} AKTIF</span>
+                       <span>{totalCap} KAP</span>
                     </div>
                   </div>
                 );
@@ -240,8 +241,8 @@ export default function LiveMonitor() {
                  <ShieldCheck size={20} />
                </div>
                <div>
-                  <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Security Node</h3>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Encrypted Data Stream</div>
+                  <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight">Simpul Keamanan</h3>
+                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Aliran Data Terenkripsi</div>
                </div>
              </div>
              

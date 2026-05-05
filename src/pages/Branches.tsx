@@ -76,15 +76,15 @@ export default function Branches() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-          <h2 className="text-3xl font-black text-slate-800 tracking-tight uppercase">Region Management</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Manage your parking branches across various locations</p>
+          <h2 className="text-3xl font-black text-slate-800 tracking-tight uppercase">Manajemen Wilayah</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Kelola cabang parkir Anda di berbagai lokasi</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-64">
              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
              <input 
                type="text"
-               placeholder="Search regions..."
+               placeholder="Cari wilayah..."
                value={searchQuery}
                onChange={(e) => setSearchQuery(e.target.value)}
                className="w-full bg-white border border-slate-200 rounded-2xl pl-11 pr-4 py-3 text-sm font-bold text-slate-700 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
@@ -95,7 +95,7 @@ export default function Branches() {
             className="bg-blue-600 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
           >
             <Plus size={16} />
-            Add Branch
+            Tambah Cabang
           </button>
         </div>
       </div>
@@ -138,7 +138,7 @@ export default function Branches() {
 
             <div className="space-y-4">
               <div>
-                <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Region Code: {branch.code}</div>
+                <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Kode Wilayah: {branch.code}</div>
                 <h3 className="text-xl font-black text-slate-800 tracking-tight leading-tight">{branch.name}</h3>
                 <div className="flex items-center gap-2 text-slate-500 mt-1">
                   <MapPin size={14} />
@@ -150,14 +150,14 @@ export default function Branches() {
                 <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                   <div className="flex items-center gap-2 text-blue-600 mb-1">
                     <Car size={14} />
-                    <span className="text-[9px] font-black uppercase tracking-widest">Cars</span>
+                    <span className="text-[9px] font-black uppercase tracking-widest">Mobil</span>
                   </div>
                   <div className="text-lg font-black text-slate-800">{branch.capacity.car}</div>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                   <div className="flex items-center gap-2 text-indigo-600 mb-1">
                     <Bike size={14} />
-                    <span className="text-[9px] font-black uppercase tracking-widest">Bikes</span>
+                    <span className="text-[9px] font-black uppercase tracking-widest">Motor</span>
                   </div>
                   <div className="text-lg font-black text-slate-800">{branch.capacity.motorcycle}</div>
                 </div>
@@ -169,10 +169,10 @@ export default function Branches() {
                   branch.status === 'active' ? "bg-emerald-100 text-emerald-600" : "bg-rose-100 text-rose-600"
                 )}>
                   {branch.status === 'active' ? <ShieldCheck size={12} /> : <ShieldAlert size={12} />}
-                  {branch.status}
+                  {branch.status === 'active' ? 'Aktif' : 'Nonaktif'}
                 </div>
                 <div className="text-slate-400">
-                  Mode: <span className="text-slate-800">{branch.mode}</span>
+                  Mode: <span className="text-slate-800 capitalize">{branch.mode}</span>
                 </div>
               </div>
             </div>
@@ -200,15 +200,15 @@ export default function Branches() {
               <form onSubmit={handleSubmit} className="p-8 space-y-8">
                 <div>
                   <h3 className="text-2xl font-black text-slate-800 uppercase tracking-tighter">
-                    {editingBranch ? 'Edit Region' : 'Nework Expansion'}
+                    {editingBranch ? 'Edit Wilayah' : 'Perluasan Jaringan'}
                   </h3>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Configure your branch operational parameters</p>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Konfigurasi parameter operasional cabang Anda</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Branch Name</label>
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Nama Cabang</label>
                       <input 
                         required
                         type="text" 
@@ -218,7 +218,7 @@ export default function Branches() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Location / Address</label>
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Lokasi / Alamat</label>
                       <input 
                         required
                         type="text" 
@@ -229,7 +229,7 @@ export default function Branches() {
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Region Code</label>
+                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Kode Wilayah</label>
                         <input 
                           required
                           type="text" 
@@ -245,8 +245,8 @@ export default function Branches() {
                           onChange={e => setFormData({...formData, status: e.target.value as any})}
                           className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 font-bold text-slate-700 focus:border-blue-500 outline-none transition-all"
                         >
-                          <option value="active">Active</option>
-                          <option value="inactive">Maintenance</option>
+                          <option value="active">Aktif</option>
+                          <option value="inactive">Pemeliharaan</option>
                         </select>
                       </div>
                     </div>
@@ -254,25 +254,25 @@ export default function Branches() {
 
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Operation Mode</label>
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Mode Operasional</label>
                       <select 
                         value={formData.mode}
                         onChange={e => setFormData({...formData, mode: e.target.value as any})}
                         className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 font-bold text-slate-700 focus:border-blue-500 outline-none transition-all"
                       >
-                        <option value="manual">Manual POS (Cashier)</option>
-                        <option value="automatic">Automatic (Manless)</option>
-                        <option value="hybrid">Hybrid System</option>
+                        <option value="manual">POS Manual (Kasir)</option>
+                        <option value="automatic">Otomatis (Manless)</option>
+                        <option value="hybrid">Sistem Hybrid</option>
                       </select>
                     </div>
 
                     <div className="bg-slate-50 p-6 rounded-[2rem] border border-slate-100 space-y-4">
-                       <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Max Capacity Settings</div>
+                       <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Pengaturan Kapasitas Maksimal</div>
                        <div className="grid grid-cols-2 gap-4">
                           <div>
                             <div className="flex items-center gap-2 mb-1.5 ml-1">
                               <Car size={12} className="text-blue-500" />
-                              <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Car Slot</label>
+                              <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Slot Mobil</label>
                             </div>
                             <input 
                               type="number" 
@@ -284,7 +284,7 @@ export default function Branches() {
                           <div>
                             <div className="flex items-center gap-2 mb-1.5 ml-1">
                               <Bike size={12} className="text-indigo-500" />
-                              <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Bike Slot</label>
+                              <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Slot Motor</label>
                             </div>
                             <input 
                               type="number" 
@@ -304,14 +304,14 @@ export default function Branches() {
                     onClick={handleClose}
                     className="flex-1 py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all"
                   >
-                    Discard Changes
+                    Batalkan Perubahan
                   </button>
                   <button 
                     type="submit"
                     className="flex-1 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
                   >
                     <Plus size={16} />
-                    {editingBranch ? 'Update Region' : 'Deploy Branch'}
+                    {editingBranch ? 'Perbarui Wilayah' : 'Terapkan Cabang'}
                   </button>
                 </div>
               </form>

@@ -46,7 +46,7 @@ export default function LoginPage() {
             <ParkingCircle size={40} />
           </div>
           <h1 className="text-3xl font-black text-white tracking-tight">ParkirPintar</h1>
-          <p className="text-slate-400 mt-2">Manless Management System Login</p>
+          <p className="text-slate-400 mt-2">Sistem Manajemen Parkir Manless</p>
         </div>
 
         <div className="bg-white rounded-3xl p-8 shadow-2xl">
@@ -109,19 +109,19 @@ export default function LoginPage() {
           <div className="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-x-8 gap-y-4">
             <div className="text-[10px] text-slate-400">
               <div className="font-black text-slate-600 uppercase mb-0.5 tracking-tighter">Admin</div>
-              <div className="font-mono">User: admin / Pass: password123</div>
+              <div className="font-mono">Pengguna: admin / Sandi: password123</div>
             </div>
             <div className="text-[10px] text-slate-400">
               <div className="font-black text-slate-600 uppercase mb-0.5 tracking-tighter">Karyawan</div>
-              <div className="font-mono">User: karyawan</div>
+              <div className="font-mono">Pengguna: karyawan</div>
             </div>
             <div className="text-[10px] text-slate-400">
               <div className="font-black text-slate-600 uppercase mb-0.5 tracking-tighter">Keuangan</div>
-              <div className="font-mono">User: keuangan</div>
+              <div className="font-mono">Pengguna: keuangan</div>
             </div>
             <div className="text-[10px] text-slate-400">
               <div className="font-black text-slate-600 uppercase mb-0.5 tracking-tighter">Direktur</div>
-              <div className="font-mono">User: direktur</div>
+              <div className="font-mono">Pengguna: direktur</div>
             </div>
           </div>
         </div>

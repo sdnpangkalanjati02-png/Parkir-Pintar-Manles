@@ -101,7 +101,7 @@ export default function ExitGate() {
       }, 1000);
     } else {
       stopScanner();
-      setError('Invalid or expired ticket scanned.');
+      setError('Tiket tidak valid atau kedaluwarsa dipindai.');
     }
   };
 
@@ -139,7 +139,7 @@ export default function ExitGate() {
     const targetLog = logs.find(l => (l.ticketCode === ticketCode || l.plateNumber === ticketCode) && l.status === 'parked');
     
     if (!targetLog) {
-      setError('Ticket not found or already exited.');
+      setError('Tiket tidak ditemukan atau sudah keluar.');
       return;
     }
 
@@ -292,7 +292,7 @@ export default function ExitGate() {
           <div className="bg-slate-900 p-2 rounded-lg text-white">
             <LogOut size={24} />
           </div>
-          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Checkout Terminal</h2>
+          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Terminal Checkout</h2>
         </div>
 
         <AnimatePresence mode="wait">
@@ -305,8 +305,8 @@ export default function ExitGate() {
               className="w-full max-w-md space-y-6"
             >
               <div className="text-center space-y-2">
-                <h3 className="text-xl font-bold text-slate-800">Scan or Enter Ticket</h3>
-                <p className="text-sm text-slate-400">Please provide your entry ticket code to calculate fare.</p>
+                <h3 className="text-xl font-bold text-slate-800">Scan atau Input Tiket</h3>
+                <p className="text-sm text-slate-400">Harap masukkan kode tiket masuk Anda untuk menghitung tarif.</p>
               </div>
 
               {showScanner ? (
@@ -345,7 +345,7 @@ export default function ExitGate() {
                               <CheckCircle2 size={32} />
                             </div>
                             <div>
-                              <p className="font-black text-lg tracking-tighter">TICKET VALID</p>
+                              <p className="font-black text-lg tracking-tighter">TIKET VALID</p>
                               <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{foundLog.log.plateNumber}</p>
                             </div>
                           </motion.div>
@@ -354,7 +354,7 @@ export default function ExitGate() {
 
                       <div className="absolute bottom-6 left-0 right-0 flex justify-center">
                         <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-bold text-white/70 uppercase tracking-[0.2em] border border-white/10">
-                          Align QR code to read
+                          Sejajarkan kode QR untuk membaca
                         </div>
                       </div>
                     </div>
@@ -364,7 +364,7 @@ export default function ExitGate() {
                     className="w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-slate-200 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
                   >
                     <X size={18} />
-                    Back to Manual Input
+                    Kembali ke Input Manual
                   </button>
                 </div>
               ) : (
@@ -378,7 +378,7 @@ export default function ExitGate() {
                         setTicketCode(val);
                         setSearchQuery(val);
                       }}
-                      placeholder="PK-XXXXXX or Plate #"
+                      placeholder="PK-XXXXXX atau Nomor Plat"
                       className="w-full bg-slate-50 border-2 border-slate-200 rounded-2xl px-6 py-5 text-2xl font-mono font-bold tracking-widest focus:border-blue-500 focus:ring-0 outline-none transition-all uppercase"
                       autoFocus
                     />
@@ -407,7 +407,7 @@ export default function ExitGate() {
                     disabled={!ticketCode}
                     className="w-full py-5 bg-blue-600 text-white rounded-2xl font-black text-xl shadow-lg shadow-blue-200 hover:bg-blue-500 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
-                    CALCULATE FARE
+                    HITUNG TARIF
                     <ArrowRight size={24} />
                   </button>
                 </form>
@@ -422,7 +422,7 @@ export default function ExitGate() {
                     exit={{ opacity: 0, y: -10 }}
                     className="w-full space-y-2 !mt-4"
                   >
-                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-2">Matching Active Records</div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-2">Data Aktif yang Cocok</div>
                     {filteredLogs.map((log) => (
                       <button
                         key={log.ticketCode}
@@ -439,7 +439,7 @@ export default function ExitGate() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-[10px] font-bold text-slate-300 uppercase">Entered</div>
+                          <div className="text-[10px] font-bold text-slate-300 uppercase">Masuk</div>
                           <div className="text-xs font-bold text-slate-600">{format(log.entryTime, 'HH:mm')}</div>
                         </div>
                       </button>
@@ -460,26 +460,26 @@ export default function ExitGate() {
             >
               <div className="space-y-6">
                 <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Parking Summary</h4>
+                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Ringkasan Parkir</h4>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2 text-slate-600 font-medium">
-                        <Timer size={16} /> Duration
+                        <Timer size={16} /> Durasi
                       </div>
                       <span className="font-bold text-slate-800">
-                        {Math.ceil((Date.now() - foundLog.log.entryTime) / (1000 * 60 * 60))} Hours
+                        {Math.ceil((Date.now() - foundLog.log.entryTime) / (1000 * 60 * 60))} Jam
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2 text-slate-600 font-medium">
-                        <CreditCard size={16} /> Plate
+                        <CreditCard size={16} /> Plat
                       </div>
                       <span className="bg-slate-900 text-white px-2 py-0.5 rounded text-xs font-bold tracking-widest uppercase">
                         {foundLog.log.plateNumber}
                       </span>
                     </div>
                     <div className="border-t border-dashed border-slate-200 mt-4 pt-4 flex justify-between items-end">
-                      <span className="text-sm font-bold text-slate-400">TOTAL FARE</span>
+                      <span className="text-sm font-bold text-slate-400">TOTAL TARIF</span>
                       <span className="text-3xl font-black text-blue-600">Rp {foundLog.fare.toLocaleString()}</span>
                     </div>
                   </div>
@@ -487,12 +487,12 @@ export default function ExitGate() {
 
                 <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-4 py-3 rounded-xl">
                   <ShieldCheck size={16} />
-                  SECURE PAYMENT PROCESSING ACTIVE
+                  PROSES PEMBAYARAN AMAN AKTIF
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-2">Select Payment Method</h4>
+                <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-2">Pilih Metode Pembayaran</h4>
                 {error && (
                   <div className="flex items-center gap-2 text-rose-600 text-xs font-bold bg-rose-50 p-3 rounded-xl border border-rose-100 mb-2">
                     <AlertCircle size={14} />
@@ -525,7 +525,7 @@ export default function ExitGate() {
                       {isProcessingPayment ? <RefreshCw className="animate-spin" size={24} /> : <CreditCard size={24} />}
                     </div>
                     <div className="text-left">
-                      <div className="font-bold text-slate-800">Electronic Money</div>
+                      <div className="font-bold text-slate-800">Uang Elektronik</div>
                       <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Flazz, TapCash, Brizzi</div>
                     </div>
                   </div>
@@ -541,8 +541,8 @@ export default function ExitGate() {
                       <Banknote size={24} />
                     </div>
                     <div className="text-left">
-                      <div className="font-bold text-slate-800">Cash / Manual</div>
-                      <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pay at counter</div>
+                      <div className="font-bold text-slate-800">Tunai / Manual</div>
+                      <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Bayar di loket</div>
                     </div>
                   </div>
                   <ArrowRight size={20} className="text-slate-200 group-hover:text-blue-600" />
@@ -552,7 +552,7 @@ export default function ExitGate() {
                   onClick={reset}
                   className="w-full mt-4 text-slate-400 text-sm font-bold hover:text-slate-600"
                 >
-                  Cancel and Back
+                  Batal dan Kembali
                 </button>
               </div>
             </motion.div>
@@ -601,7 +601,7 @@ export default function ExitGate() {
                   <div className="text-slate-400 font-bold uppercase text-[10px] tracking-wider text-left">Metode</div>
                   <div className="text-slate-800 font-black text-right uppercase">{pendingPaymentInfo?.method}</div>
                   
-                  <div className="text-slate-400 font-bold uppercase text-[10px] tracking-wider text-left">Order ID</div>
+                  <div className="text-slate-400 font-bold uppercase text-[10px] tracking-wider text-left">ID Pesanan</div>
                   <div className="text-slate-800 font-mono text-[11px] text-right truncate pl-4">{pendingPaymentInfo?.details?.order_id}</div>
                   
                   <div className="text-slate-400 font-bold uppercase text-[10px] tracking-wider text-left">Total Bayar</div>
@@ -634,16 +634,16 @@ export default function ExitGate() {
                 <CheckCircle2 size={80} strokeWidth={3} />
               </div>
               <div className="space-y-2">
-                <h3 className="text-3xl font-black text-slate-800 tracking-tight">PAYMENT SUCCESSFUL!</h3>
+                <h3 className="text-3xl font-black text-slate-800 tracking-tight">PEMBAYARAN BERHASIL!</h3>
                 <p className="text-slate-500 font-medium max-w-sm">
-                  The exit barrier will open now. Please drive safely and thank you for visiting.
+                  Barrier keluar akan terbuka sekarang. Harap berkendara dengan hati-hati dan terima kasih atas kunjungan Anda.
                 </p>
               </div>
               
               <div className="bg-slate-50 p-6 rounded-2xl border border-warning-100 w-full max-w-xs space-y-2">
                 <div className="flex items-center justify-center gap-2 text-warning-700 font-bold animate-pulse">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                  GATE BARRIER OPENING...
+                  BARRIER GATE TERBUKA...
                 </div>
               </div>
 
@@ -659,12 +659,12 @@ export default function ExitGate() {
                   {isPrinting ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      PRINTING...
+                      MENCETAK...
                     </>
                   ) : (
                     <>
                       <Printer size={20} />
-                      PRINT RECEIPT
+                      CETAK STRUK
                     </>
                   )}
                 </button>
@@ -672,7 +672,7 @@ export default function ExitGate() {
                   onClick={reset}
                    className="px-8 py-4 bg-white border border-slate-200 rounded-2xl font-bold hover:bg-slate-50 transition-colors"
                 >
-                  DONE
+                  SELESAI
                 </button>
               </div>
 
@@ -685,7 +685,7 @@ export default function ExitGate() {
                     className="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 z-50"
                   >
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span className="font-bold text-sm tracking-wide">Preparing receipt, please wait...</span>
+                    <span className="font-bold text-sm tracking-wide">Menyiapkan struk, harap tunggu...</span>
                   </motion.div>
                 )}
               </AnimatePresence>

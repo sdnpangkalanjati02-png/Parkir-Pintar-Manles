@@ -34,8 +34,8 @@ export default function Configuration() {
     <div className="max-w-6xl mx-auto space-y-8 pb-20">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">System Configuration</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Manage infrastructure, pricing, and hardware integrations.</p>
+          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Konfigurasi Sistem</h2>
+          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Kelola infrastruktur, harga, dan integrasi perangkat keras.</p>
         </div>
         <div className="flex gap-3">
           <button
@@ -47,7 +47,7 @@ export default function Configuration() {
             )}
           >
             {isSaved ? <ShieldAlert size={16} /> : <Save size={16} />}
-            {isSaved ? 'SAVED' : 'SAVE ALL CHANGES'}
+            {isSaved ? 'TERSIMPAN' : 'SIMPAN SEMUA PERUBAHAN'}
           </button>
         </div>
       </div>
@@ -61,13 +61,13 @@ export default function Configuration() {
               <div className="bg-blue-50 text-blue-600 p-2.5 rounded-xl">
                 <Settings size={20} />
               </div>
-              <h3 className="font-black text-slate-800 tracking-tighter uppercase">Pricing Matrix</h3>
+              <h3 className="font-black text-slate-800 tracking-tighter uppercase">Matriks Harga</h3>
             </div>
 
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Base (Car)</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Dasar (Mobil)</label>
                   <input 
                     type="number" 
                     value={localConfig.baseRateCar}
@@ -76,7 +76,7 @@ export default function Configuration() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Hourly (Car)</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Per Jam (Mobil)</label>
                   <input 
                     type="number" 
                     value={localConfig.hourlyRateCar}
@@ -88,7 +88,7 @@ export default function Configuration() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Base (Motor)</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Dasar (Motor)</label>
                   <input 
                     type="number" 
                     value={localConfig.baseRateMotorcycle}
@@ -97,7 +97,7 @@ export default function Configuration() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Hourly (Motor)</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Per Jam (Motor)</label>
                   <input 
                     type="number" 
                     value={localConfig.hourlyRateMotorcycle}
@@ -108,7 +108,7 @@ export default function Configuration() {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Free Buffer (Mins)</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Toleransi (Menit)</label>
                 <input 
                   type="number" 
                   value={localConfig.freeBufferMinutes}
@@ -125,10 +125,10 @@ export default function Configuration() {
               <div className="bg-rose-100 text-rose-600 p-2 rounded-xl">
                 <RotateCcw size={20} />
               </div>
-              <h3 className="font-black text-rose-900 text-xs uppercase tracking-widest">Danger Zone</h3>
+              <h3 className="font-black text-rose-900 text-xs uppercase tracking-widest">Zona Bahaya</h3>
             </div>
             <p className="text-[10px] text-rose-700 font-bold uppercase leading-relaxed tracking-tight">
-              RESETTING WILL PURGE ALL TRANSACTIONS. PROCEED WITH EXTREME CAUTION.
+              RESET AKAN MENGHAPUS SEMUA TRANSAKSI. HARAP BERHATI-HATI.
             </p>
             <button
               onClick={handleReset}
@@ -146,7 +146,7 @@ export default function Configuration() {
               <div className="bg-emerald-50 text-emerald-600 p-2.5 rounded-xl">
                 <Globe size={20} />
               </div>
-              <h3 className="font-black text-slate-800 tracking-tighter uppercase">Company Profile</h3>
+              <h3 className="font-black text-slate-800 tracking-tighter uppercase">Profil Perusahaan</h3>
             </div>
 
             <div className="space-y-4">
@@ -162,12 +162,12 @@ export default function Configuration() {
                   value={localConfig.companyLogoUrl}
                   onChange={e => setLocalConfig({...localConfig, companyLogoUrl: e.target.value})}
                   className="w-full text-[10px] font-mono bg-slate-50 border border-slate-100 rounded px-2 py-1"
-                  placeholder="Logo URL"
+                  placeholder="URL Logo"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Company Name</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Nama Perusahaan</label>
                 <input 
                   type="text" 
                   value={localConfig.companyName}
@@ -177,7 +177,7 @@ export default function Configuration() {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Address</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Alamat</label>
                 <textarea 
                   value={localConfig.companyAddress}
                   onChange={e => setLocalConfig({...localConfig, companyAddress: e.target.value})}
@@ -187,7 +187,7 @@ export default function Configuration() {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Phone</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Telepon</label>
                 <input 
                   type="text" 
                   value={localConfig.companyPhone}
@@ -208,12 +208,12 @@ export default function Configuration() {
                   <Activity size={24} />
                 </div>
                 <div>
-                  <h3 className="font-black text-slate-800 tracking-tighter uppercase">Hardware & Network</h3>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Connect Manless Stations, Barriers & Printers</p>
+                  <h3 className="font-black text-slate-800 tracking-tighter uppercase">Hardware & Jaringan</h3>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Hubungkan Stasiun Manless, Barrier & Printer</p>
                 </div>
               </div>
               <div className="flex gap-2">
-                <div className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-100">LAN ACTIVE</div>
+                <div className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-100">LAN AKTIF</div>
               </div>
             </div>
 
@@ -222,11 +222,11 @@ export default function Configuration() {
               <div className="space-y-6">
                 <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em] flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-indigo-600 rounded-full" />
-                  LAN Configuration
+                  Konfigurasi LAN
                 </h4>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">Static Server IP</label>
+                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">IP Server Statis</label>
                     <input 
                       type="text" 
                       value={localConfig.serverIp}
@@ -235,7 +235,7 @@ export default function Configuration() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">Network Gateway</label>
+                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">Gateway Jaringan</label>
                     <input 
                       type="text" 
                       value={localConfig.gateway}
@@ -250,12 +250,12 @@ export default function Configuration() {
               <div className="space-y-6">
                 <h4 className="text-[10px] font-black text-orange-600 uppercase tracking-[0.2em] flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-orange-600 rounded-full" />
-                  Controller Settings
+                  Pengaturan Kontroler
                 </h4>
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-3">
                     <div className="col-span-2">
-                      <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">Gate IP</label>
+                      <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">IP Gate</label>
                       <input 
                         type="text" 
                         value={localConfig.gateControllerIp}
@@ -274,7 +274,7 @@ export default function Configuration() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">Manless Station IP</label>
+                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">IP Stasiun Manless</label>
                     <input 
                       type="text" 
                       value={localConfig.manlessStationIp}
@@ -287,10 +287,10 @@ export default function Configuration() {
 
               {/* Printer Setup */}
               <div className="space-y-6 md:col-span-2 pt-4 border-t border-slate-50">
-                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Peripherals Output</h4>
+                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Output Perangkat Tambahan</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3 px-1">Thermal Printer Protocol</label>
+                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3 px-1">Protokol Printer Thermal</label>
                     <div className="flex gap-2">
                       {['thermal', 'dot-matrix', 'laser'].map((type) => (
                         <button
@@ -303,22 +303,22 @@ export default function Configuration() {
                               : "bg-slate-50 text-slate-400 border-slate-100 hover:border-slate-200"
                           )}
                         >
-                          {type.replace('-', ' ')}
+                          {type === 'thermal' ? 'Thermal' : type === 'dot-matrix' ? 'Dot Matrix' : 'Laser'}
                         </button>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">USB/Serial COM Port</label>
+                    <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5 px-1">Port COM USB/Serial</label>
                     <select 
                       value={localConfig.printerPort}
                       onChange={e => setLocalConfig({...localConfig, printerPort: e.target.value})}
                       className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 font-bold text-xs text-slate-600 focus:border-indigo-500 outline-none cursor-pointer"
                     >
-                      <option value="COM1">COM 1 (Standard)</option>
+                      <option value="COM1">COM 1 (Standar)</option>
                       <option value="COM2">COM 2</option>
                       <option value="USB001">USB 001</option>
-                      <option value="LPT1">LPT 1 (Legacy)</option>
+                      <option value="LPT1">LPT 1 (Lawas)</option>
                     </select>
                   </div>
                 </div>
@@ -329,15 +329,15 @@ export default function Configuration() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
               <button className="py-3 px-4 bg-indigo-50 text-indigo-600 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-indigo-100 hover:bg-indigo-100 transition-all flex items-center justify-center gap-2">
                 <RefreshCw size={14} />
-                Ping Controller
+                Ping Kontroler
               </button>
               <button className="py-3 px-4 bg-orange-50 text-orange-600 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-orange-100 hover:bg-orange-100 transition-all flex items-center justify-center gap-2">
                 <Power size={14} />
-                Trigger Gate
+                Tes Buka Gate
               </button>
               <button className="py-3 px-4 bg-slate-50 text-slate-600 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-slate-200 hover:bg-slate-100 transition-all flex items-center justify-center gap-2">
                 <FileText size={14} />
-                Test Print
+                Tes Cetak Tiket
               </button>
             </div>
           </div>
