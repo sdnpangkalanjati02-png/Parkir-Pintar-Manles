@@ -102,12 +102,17 @@ async function configureApp(app: express.Express) {
 // On Vercel, we don't serve static files from Express; Vercel handles it better.
 await configureApp(app);
 
-// Start server if not in a serverless environment
-if (!process.env.VERCEL) {
-  const PORT = process.env.PORT || 3000;
+// Start server if a PORT is provided (standard for Cloud Run and other environments)
+const PORT = Number(process.env.PORT) || (process.env.VERCEL ? 0 : 3000);
+if (PORT > 0) {
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is listening on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`Vercel: ${process.env.VERCEL || 'no'}`);
+    console.log(`Cloud Run: ${process.env.K_SERVICE || 'no'}`);
   });
+} else {
+  console.log("Server initialized for serverless environment (no port listening)");
 }
 
 export default app;
