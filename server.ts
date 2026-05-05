@@ -15,8 +15,9 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function startServer() {
-  const app = express();
+const app = express();
+
+async function configureApp(app: express.Express) {
   const PORT = 3000;
 
   app.use(express.json());
@@ -40,7 +41,7 @@ async function startServer() {
     return snap;
   };
 
-  // API Routes
+// API Routes
   app.post("/api/payment/create", async (req, res) => {
     try {
       const { ticketCode, amount, plateNumber, vehicleType } = req.body;
@@ -93,9 +94,19 @@ async function startServer() {
     });
   }
 
+  return { app, PORT };
+}
+
+// In serverless environments like Vercel, we need to initialize the app
+// but NOT call app.listen().
+await configureApp(app);
+
+// Start server if not in a serverless environment (like Vercel)
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  const PORT = 3000;
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }
 
-startServer();
+export default app;
