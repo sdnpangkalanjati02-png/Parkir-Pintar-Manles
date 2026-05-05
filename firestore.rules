@@ -67,15 +67,10 @@ service cloud.firestore {
     // -------------------------------------------------------------------------
 
     match /users/{userId} {
-      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
-      allow list: if isAdmin();
-      allow create: if isSignedIn() && request.auth.uid == userId && (
-        !('role' in incoming()) || incoming().role == 'karyawan'
-      ) && incoming().name.size() <= 100 && incoming().username.size() <= 50;
-      allow update: if isSignedIn() && request.auth.uid == userId && (
-        incoming().diff(existing()).affectedKeys().hasOnly(['name', 'username']) &&
-        incoming().name.size() <= 100 && incoming().username.size() <= 50
-      ) || isAdmin();
+      // Izinkan baca publik untuk mendukung sistem login mock dalam prototipe ini.
+      // PERINGATAN: Dalam produksi sesungguhnya, gunakan Firebase Auth dan jangan simpan password di dokumen.
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
     }
 
     match /logs/{logId} {

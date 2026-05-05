@@ -99,11 +99,12 @@ async function configureApp(app: express.Express) {
 
 // In serverless environments like Vercel, we need to initialize the app
 // but NOT call app.listen().
+// On Vercel, we don't serve static files from Express; Vercel handles it better.
 await configureApp(app);
 
-// Start server if not in a serverless environment (like Vercel)
-if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
-  const PORT = 3000;
+// Start server if not in a serverless environment
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });

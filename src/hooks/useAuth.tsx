@@ -63,9 +63,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (username: string, password: string): Promise<boolean> => {
-    await new Promise(resolve => setTimeout(resolve, 800));
+    // Artificial small delay for UX
+    await new Promise(resolve => setTimeout(resolve, 300));
     
-    // Check against synced users
+    console.log(`Checking login for: ${username}`);
+    if (users.length === 0) {
+      console.warn("User list is empty, synchronization might still be in progress.");
+    }
     const foundUser = users.find(u => u.username === username && u.password === password);
     
     if (foundUser) {

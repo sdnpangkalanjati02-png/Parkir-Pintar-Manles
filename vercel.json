@@ -6,8 +6,13 @@
       "destination": "/server.ts"
     },
     {
-      "source": "/((?!api/|assets/|favicon.ico|.*\\.png|.*\\.jpg|.*\\.svg).*)",
-      "destination": "/index.html"
+      "source": "/(.*)",
+      "destination": "/dist/$1",
+      "check": true
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/dist/index.html"
     }
   ]
 }
